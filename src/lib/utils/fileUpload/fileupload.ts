@@ -2,6 +2,10 @@
 import fs from "fs/promises";
 import path from "path";
 
+const config = {
+  baseDir: "assets",
+}
+
 interface SaveAssetOptions {
   /**
    * If true, overwrites an existing file with the same name.
@@ -62,7 +66,7 @@ interface SaveFileOptions {
   baseFileName?: any;
 
   /**
-   * directory to use. If not provided, the file is saved in the public directory.
+   * directory to use. If not provided, the file is saved in the base directory.
    * @default null
    */
   Dir?: any;
@@ -79,7 +83,7 @@ export const saveUserAsset = async (fileObject: any, user: any, options: SaveAss
   let fileName = options.baseFileName ? `${options.baseFileName}${extension}` : fileObject.fileName?.replace(/\s+/g, "_");
 
   const subDir = options.subDir ?? "";
-  const userAssetsDir = path.join("public", "assets", "users", user._id.toString(), subDir);
+  const userAssetsDir = path.join(config.baseDir, "users", user._id.toString(), subDir);
 
   try {
     await fs.mkdir(userAssetsDir, { recursive: true });
@@ -94,8 +98,9 @@ export const saveUserAsset = async (fileObject: any, user: any, options: SaveAss
     }
 
     await fs.writeFile(filePath, buffer);
-    return { url: `/${path.relative("public", filePath)}` };
+    return { url: `/${filePath}` };
   } catch (error: any) {
+    console.log(error)
     return { error: error.message || "Something went wrong while saving the images" };
   }
 };
@@ -142,8 +147,8 @@ export const saveFile = async (base64:any,filename:any,options:SaveFileOptions) 
   let fileName = options.baseFileName ? `${options.baseFileName}${extension}` : filename?.replace(/\s+/g, "_");
 
   const dir = options.Dir ?? "";
-  // join the public directory with the dir provided
-  const fileDir = path.join("public", dir);
+  // join the base directory with the dir provided
+  const fileDir = path.join(config.baseDir, dir);
   
   try {
     await fs.mkdir(fileDir, { recursive: true });
@@ -158,7 +163,7 @@ export const saveFile = async (base64:any,filename:any,options:SaveFileOptions) 
     }
 
     await fs.writeFile(filePath, buffer);
-    return { url: `/${path.relative("public", filePath)}` };
+    return { url: `/${filePath}` };
   } catch (error: any) {
     return { error: error.message || "Something went wrong while saving the images" };
   } 

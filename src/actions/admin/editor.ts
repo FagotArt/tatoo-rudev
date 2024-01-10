@@ -14,7 +14,7 @@ const processContent = async (content: string,dir?:any) => {
   //@ts-ignore
   for (const img of images) {
     if (img.src.startsWith("data:image")) {
-      const base64 = img.src.split(",")[1];
+      const base64 = img.src;
       const filename = img.alt;
 
       const { url, error } = await saveFile(base64, filename, {
@@ -34,7 +34,7 @@ export const publishArticle = withServerAuth(
     
     if(article.image && typeof article.image === "object"){
       const { url, error } = await saveFile(article.image.file, article.image.fileName, {
-        Dir: `assets/articles/${article.slug}`,
+        Dir: `articles/${article.slug}`,
         baseFileName: "featured",
         overwrite: true,
       });
@@ -53,7 +53,7 @@ export const publishArticle = withServerAuth(
     }
 
     //separate images and save them
-    const content = await processContent(data.content,`assets/articles/${data.slug}`);
+    const content = await processContent(data.content,`articles/${data.slug}`);
     data.content = content;
 
     //save article
@@ -63,7 +63,7 @@ export const publishArticle = withServerAuth(
     //return article info
     return {
       article: dbArticle,
-      url: `/assets/articles/${dbArticle.slug}`,
+      url: `/articles/${dbArticle.slug}`,
     };
   },
   {

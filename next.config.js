@@ -2,7 +2,7 @@
 const nextConfig = {
     experimental:{
         serverActions: {
-            allowedOrigins: ['inkformedtattoos.com','localhost:8080']
+            allowedOrigins: ['inkformedtattoos.com','localhost:8080','localhost:3000']
         }
     },
     typescript :{
