@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import '@/lib/models/';
 import path from 'path';
+import fs from 'fs';
 
 dotenv.config(); 
 
@@ -28,7 +29,17 @@ const connectToMongoDB = async () => {
 app.prepare().then(() => {
   const server = express();
 
-  server.use('/assets', express.static(path.join(__dirname, 'assets')));
+  server.use('/assets', (req, res) => {
+    const filePath = path.join(__dirname, 'assets', req.path);
+    // console log if the file exists or not
+    if (fs.existsSync(filePath)) {
+      console.log('File exists',filePath);
+    } else {
+      console.log('File does not exist',filePath);
+    }
+    return res.sendFile(filePath);
+  
+  });
 
   server.all('*', (req:any, res:any) => {
     handle(req, res)

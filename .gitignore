@@ -15,7 +15,7 @@
 
 # production
 /build
-assets
+/assets
 
 # misc
 .DS_Store
