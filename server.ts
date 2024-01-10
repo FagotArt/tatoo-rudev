@@ -30,7 +30,9 @@ app.prepare().then(() => {
   const server = express();
 
   server.use('/assets', (req, res) => {
-    const filePath = path.join(__dirname, 'assets', req.path);
+    const basePath = process.env.NODE_ENV === 'production' ? path.join(__dirname, '..') : __dirname;
+
+    const filePath = path.join(basePath, 'assets', req.path);
     // console log if the file exists or not
     if (fs.existsSync(filePath)) {
       console.log('File exists',filePath);
