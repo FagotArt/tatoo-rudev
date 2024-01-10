@@ -28,7 +28,7 @@ const connectToMongoDB = async () => {
 app.prepare().then(() => {
   const server = express();
 
-  server.use(express.static(path.join(__dirname, 'public')))
+  server.use('/assets', express.static(path.join(__dirname, 'public/assets')));
 
   server.all('*', (req:any, res:any) => {
     handle(req, res)

@@ -34,7 +34,7 @@ export const publishArticle = withServerAuth(
     
     if(article.image && typeof article.image === "object"){
       const { url, error } = await saveFile(article.image.file, article.image.fileName, {
-        Dir: `articles/${article.slug}`,
+        Dir: `assets/articles/${article.slug}`,
         baseFileName: "featured",
         overwrite: true,
       });
@@ -53,7 +53,7 @@ export const publishArticle = withServerAuth(
     }
 
     //separate images and save them
-    const content = await processContent(data.content,`articles/${data.slug}`);
+    const content = await processContent(data.content,`assets/articles/${data.slug}`);
     data.content = content;
 
     //save article
@@ -63,7 +63,7 @@ export const publishArticle = withServerAuth(
     //return article info
     return {
       article: dbArticle,
-      url: `/articles/${dbArticle.slug}`,
+      url: `/assets/articles/${dbArticle.slug}`,
     };
   },
   {
