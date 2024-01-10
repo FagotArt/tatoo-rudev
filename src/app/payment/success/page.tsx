@@ -13,12 +13,16 @@ const pollInterval = 1000;
 const timeout = 60000;
 let timeElapsed = 0;
 
-const page = () => {
+const Page = () => {
   const searchParams = useSearchParams();
   const [unlocked, setUnlocked] = useState<any>();
   const [sessionLoading, setSessionLoading] = useState(true);
   const [session, setSession] = useState<any>();
   const { redirect } = useRedirect();
+
+  useEffect(() => {
+    fetchSession();
+  }, [searchParams]);
 
   //if theres no session
   if (!searchParams.has("session_id")) {
@@ -66,9 +70,6 @@ const page = () => {
       timeElapsed += pollInterval;
     }, pollInterval);
   };
-  useEffect(() => {
-    fetchSession();
-  }, [searchParams]);
 
   return (
     <div className="py-[150px]">
@@ -123,4 +124,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

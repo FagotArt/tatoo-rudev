@@ -40,4 +40,6 @@ const SearchBar = forwardRef((props: any,ref:any) => {
   );
 })
 
+SearchBar.displayName = "SearchBar";
+
 export default SearchBar;

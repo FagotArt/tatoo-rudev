@@ -9,7 +9,7 @@ import { getArtists } from "@/actions/artists/getartists";
 import { CategoriesFilter, FavoriteFilter, LocationFilter, SearchBarFilter, SortByFilter } from "./filters";
 import SideBar from "./sidebar";
 
-const page = async ({ params, searchParams }: any) => {
+const Page = async ({ params, searchParams }: any) => {
 
   const artists = await getArtists({
     filter:searchParams
@@ -39,8 +39,9 @@ const page = async ({ params, searchParams }: any) => {
             <div className="flex-1 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.6),rgba(0,0,0,0.4))]">
               <div className="flex flex-wrap gap-[1rem] justify-center md:justify-start items-center p-[2rem] w-fit max-w-[1200px] mx-auto">
                 {(artists && artists.length > 0) ? (
-                  artists.map((artist: any) => (
+                  artists.map((artist: any,i:any) => (
                     <ArtistCard
+                    key={i}
                       username={artist.username}
                       image={artist.profilePicture}
                       artistName={artist.firstName + " " + artist.lastName}
@@ -62,4 +63,6 @@ const page = async ({ params, searchParams }: any) => {
   );
 };
 
-export default page;
+export const dynamic = 'force-dynamic'
+
+export default Page;

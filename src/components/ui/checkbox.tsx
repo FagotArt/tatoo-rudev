@@ -37,4 +37,6 @@ const CheckBox = forwardRef((props: any, ref: any) => {
   );
 });
 
+CheckBox.displayName = "CheckBox";
+
 export default CheckBox;

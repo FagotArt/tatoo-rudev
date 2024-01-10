@@ -17,7 +17,10 @@ const ReactQuill = dynamic(
   async () => {
     const { default: RQ } = await import("react-quill");
 
-    return ({ forwardedRef, ...props }: any) => <RQ ref={forwardedRef} {...props} />;
+    const DynamicQuill = ({ forwardedRef, ...props }: any) => <RQ ref={forwardedRef} {...props} />;
+    DynamicQuill.displayName = "DynamicQuill";
+
+    return DynamicQuill;
   },
   {
     ssr: false, // This line is important. It's what prevents server-side render
@@ -42,9 +45,9 @@ const Editor = () => {
   };
 
   const publish = async () => {
-    const { error, article : published, url } = await publishArticle(article);
+    const { error, article: published, url } = await publishArticle(article);
     if (error) {
-        console.log(error)
+      console.log(error);
       setErrors(error);
     } else {
       setErrors(null);
@@ -60,12 +63,15 @@ const Editor = () => {
       const fullUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/articles/${published.slug}`;
       await modal({
         Element: () => (
-          <div
-            className="font-['Helvetica']"
-          >
-            <div>Your article <strong>"{published.title}"</strong> was published successfully!</div>
+          <div className="font-['Helvetica']">
             <div>
-              you can view it at <Link className='text-black/70' href={fullUrl}>{fullUrl}</Link>
+              Your article <strong>&apos;{published.title}&apos;</strong> was published successfully!
+            </div>
+            <div>
+              you can view it at{" "}
+              <Link className="text-black/70" href={fullUrl}>
+                {fullUrl}
+              </Link>
             </div>
           </div>
         ),
@@ -158,7 +164,7 @@ const Editor = () => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
 
-        reader.onload = (event:any) => {
+        reader.onload = (event: any) => {
           const base64 = event.target.result;
           const filename = file.name;
 
@@ -175,7 +181,7 @@ const Editor = () => {
     };
   };
 
-  const removeImage = (e:any) => {
+  const removeImage = (e: any) => {
     e.stopPropagation();
     setArticle({
       ...article,

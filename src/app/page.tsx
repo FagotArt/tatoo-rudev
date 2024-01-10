@@ -36,7 +36,7 @@ export default async function Home() {
       <div className="px-[2rem] flex justify-center items-center flex-wrap gap-[3rem] mb-[5rem]">
         <Card href="/signup/customer" className="text-center max-w-[600px] cursor-pointer">
           <img src="/images/icons/looking_for_artist.png" className="h-[10rem] mb-[1rem] mx-auto" />
-          <div className="text-[1.3rem] font-bold mb-[1rem]">i'm looking for an artist</div>
+          <div className="text-[1.3rem] font-bold mb-[1rem]">i&apos;m looking for an artist</div>
           <div className="font-['Helvetica'] text-[0.9rem]">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Assumenda debitis ut nam eum accusantium amet, aut sequi et ab! A quam ipsam porro officiis molestias
             doloribus nobis similique necessitatibus fugiat.
@@ -44,7 +44,7 @@ export default async function Home() {
         </Card>
         <Card href="/signup/artist" className="text-center max-w-[600px] cursor-pointer">
           <img src="/images/icons/looking_for_costumer.png" className="h-[10rem] pt-[2rem]  mb-[1rem] mx-auto" />
-          <div className="text-[1.3rem] font-bold mb-[1rem]">i'm an artist</div>
+          <div className="text-[1.3rem] font-bold mb-[1rem]">i&apos;m an artist</div>
           <div className="font-['Helvetica'] text-[0.9rem]">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Assumenda debitis ut nam eum accusantium amet, aut sequi et ab! A quam ipsam porro officiis molestias
             doloribus nobis similique necessitatibus fugiat.
@@ -151,3 +151,5 @@ export default async function Home() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic'

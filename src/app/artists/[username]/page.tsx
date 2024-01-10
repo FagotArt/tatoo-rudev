@@ -78,8 +78,8 @@ const page = async ({ params }: any) => {
           <div className="flex flex-col gap-[10px] px-[10px] min-w-[200px] md:min-w-[300px]">
             <BackgroundTitle containerClassName="flex-x-1">Styles :</BackgroundTitle>
             <div className="w-[250px] pl-[1.5rem] text-[0.9rem]">
-              {artist?.styles?.map((style: any) => (
-                <div className="font-['Helvetica']">{style}</div>
+              {artist?.styles?.map((style: any,i:any) => (
+                <div key={i} className="font-['Helvetica']">{style}</div>
               ))}
             </div>
             <BackgroundTitle containerClassName="flex-x-1">Type :</BackgroundTitle>
@@ -105,5 +105,7 @@ const page = async ({ params }: any) => {
     </div>
   );
 };
+
+export const dynamic = 'force-dynamic'
 
 export default page;

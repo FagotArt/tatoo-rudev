@@ -95,8 +95,8 @@ const Reviews = (props: any) => {
             transform: `translateX(calc(-${currentIndex} * calc(250px + 1rem)))`,
           }}
         >
-          {reviews?.map((review: any) => (
-            <ArtistTestimonial rating={review.rating} username={review?.user?.firstName + " " + review?.user?.lastName} time={moment(review?.createdAt).fromNow()}>
+          {reviews?.map((review: any,i:any) => (
+            <ArtistTestimonial key={i} rating={review.rating} username={review?.user?.firstName + " " + review?.user?.lastName} time={moment(review?.createdAt).fromNow()}>
               {review?.description}
             </ArtistTestimonial>
           ))}

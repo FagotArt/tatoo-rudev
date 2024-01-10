@@ -105,5 +105,6 @@ const MultiInput = forwardRef((props: any, ref: any) => {
     </>
   );
 });
+MultiInput.displayName = "MultiInput";
 
 export default MultiInput;

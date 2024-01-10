@@ -6,12 +6,12 @@ import BorderDivider from "@/components/ui/borderdivider";
 import ErrorMessage from "@/components/ui/errormessage";
 import Input from "@/components/ui/input";
 import { signIn } from "next-auth/react";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useRedirect } from "@/lib/utils/redirect/redirect";
 
-const page = () => {
-  const [errors, setErrors] = React.useState<any>();
+const Page = () => {
+  const [errors, setErrors] = useState<any>();
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -55,4 +55,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

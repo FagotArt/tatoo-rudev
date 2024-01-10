@@ -11,9 +11,9 @@
         "esModuleInterop": true,
         "baseUrl": ".",
         "paths" : {
-            "@/*": ["./src/*"],
+            "@/*": ["./src/*"]
         }
     },
-    "include": ["./**/*.ts"],
-    "exclude": ["node_modules", "**/*.spec.ts"]
+    "include": ["./server.ts"],
+    "exclude": ["node_modules", "src", "**/*.spec.ts"]
 }

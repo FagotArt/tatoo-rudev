@@ -9,23 +9,7 @@ import CheckBox from "@/components/ui/checkbox";
 import Input from "@/components/ui/input";
 import React, { useEffect, useRef, useTransition } from "react";
 
-const page = () => {
-  const firstNameRef = useRef<HTMLInputElement>(null);
-  const lastNameRef = useRef<HTMLInputElement>(null);
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-
-  const signup = async () => {
-    const { error, user } = await signUp({
-      firstName: firstNameRef.current?.value,
-      lastName: lastNameRef.current?.value,
-      username: usernameRef.current?.value,
-      email: emailRef.current?.value,
-      password: passwordRef.current?.value,
-    });
-  };
-
+const Page = () => {
   return (
     <div className="min-h-[100vh] pb-[5rem]">
       <HeaderSection className="pt-[140px]"></HeaderSection>
@@ -34,7 +18,7 @@ const page = () => {
       <div className="px-[2rem] pt-[5rem] flex justify-center items-center flex-wrap gap-[3rem] mb-[5rem]">
         <Card href='/signup/customer' className="text-center max-w-[600px] cursor-pointer">
           <img src="/images/icons/looking_for_artist.png" className="h-[10rem] mb-[1rem] mx-auto" />
-          <div className="text-[1.3rem] font-bold mb-[1rem]">i'm looking for an artist</div>
+          <div className="text-[1.3rem] font-bold mb-[1rem]">i&apos;m looking for an artist</div>
           <div className="font-['Helvetica'] text-[0.9rem]">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Assumenda debitis ut nam eum accusantium amet, aut sequi et ab! A quam ipsam porro officiis molestias
             doloribus nobis similique necessitatibus fugiat.
@@ -42,7 +26,7 @@ const page = () => {
         </Card>
         <Card href='/signup/artist' className="text-center max-w-[600px] cursor-pointer">
           <img src="/images/icons/looking_for_costumer.png" className="h-[10rem] pt-[2rem]  mb-[1rem] mx-auto" />
-          <div className="text-[1.3rem] font-bold mb-[1rem]">i'm looking for a customer</div>
+          <div className="text-[1.3rem] font-bold mb-[1rem]">i&apos;m looking for a customer</div>
           <div className="font-['Helvetica'] text-[0.9rem]">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Assumenda debitis ut nam eum accusantium amet, aut sequi et ab! A quam ipsam porro officiis molestias
             doloribus nobis similique necessitatibus fugiat.
@@ -53,4 +37,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

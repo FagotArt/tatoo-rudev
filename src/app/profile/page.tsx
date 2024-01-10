@@ -25,7 +25,7 @@ import { TfiUnlock } from "react-icons/tfi";
 
 import Link from "next/link";
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const session = useSession();
   const user: any = session?.data?.user;
@@ -152,8 +152,8 @@ const page = () => {
               <div className="p-[1rem]">
                 <div className="font-['Helvetica'] text-[0.9rem] mb-[1rem]">Favorite Artists</div>
                 <div className="flex gap-[1rem] items-center justify-start ">
-                  {user?.favorites?.map((fav: any) => (
-                    <FavoriteArtist id={fav} />
+                  {user?.favorites?.map((fav: any,i:any) => (
+                    <FavoriteArtist key={i} id={fav} />
                   ))}
                 </div>
               </div>
@@ -172,4 +172,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

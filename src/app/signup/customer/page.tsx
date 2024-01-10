@@ -13,7 +13,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useRef } from "react";
 
-const page = () => {
+const Page = () => {
   const [errors, setErrors] = React.useState<any>();
   const router = useRouter();
   const firstNameRef = useRef<HTMLInputElement>(null);
@@ -106,4 +106,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

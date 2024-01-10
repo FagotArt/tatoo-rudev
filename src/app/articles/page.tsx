@@ -32,8 +32,8 @@ const page = async ({ params }: any) => {
         containerClassName="mx-[10px]"
         className="flex max-w-[1200px] mx-auto flex-wrap gap-[2rem] justify-center items-center py-[2rem]"
       >
-        {articles?.map((article: any) => (
-          <BlogCard href={`/articles/${article.slug}`} title={article.title} image={article?.image}>
+        {articles?.map((article: any,i:any) => (
+          <BlogCard key={i} href={`/articles/${article.slug}`} title={article.title} image={article?.image}>
             {article?.description}
           </BlogCard>
         ))}
@@ -44,5 +44,7 @@ const page = async ({ params }: any) => {
     </div>
   );
 };
+
+export const dynamic = 'force-dynamic'
 
 export default page;

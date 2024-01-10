@@ -45,6 +45,7 @@ const useFilterParams = () => {
     const newFilters = [];
 
     // Assuming your URL query parameters are structured as arrays
+    //@ts-ignore
     for (const [key, value] of searchParams.entries()) {
       if (Array.isArray(value)) {
         value.forEach((val) => newFilters.push([key, val]));

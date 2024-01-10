@@ -132,9 +132,8 @@ const Dialog = ({ show, proceed, Element }: any) => {
   );
 };
 
-const Confirm =
-  (confirmation: any) =>
-  ({ accept, close }: any) => {
+const Confirm = (confirmation: any) => {
+  const ConfirmComponent = ({ accept, close }: any) => {
     return (
       <BorderDiv contentClassName="px-[2rem] py-[2rem]">
         <CloseButton onClick={close} />
@@ -146,14 +145,21 @@ const Confirm =
       </BorderDiv>
     );
   };
+  ConfirmComponent.displayName = "ConfirmComponent";
+  return ConfirmComponent;
+};
 
-const Wrapper = (Element: any) => (props: any) => {
-  return (
-    <BorderDiv contentClassName="px-[2rem] py-[2rem]">
-      <CloseButton onClick={props.close} />
-      <Element {...props} />
-    </BorderDiv>
-  );
+const Wrapper = (Element: any) => {
+  const WrapperComponent = (props: any) => {
+    return (
+      <BorderDiv contentClassName="px-[2rem] py-[2rem]">
+        <CloseButton onClick={props.close} />
+        <Element {...props} />
+      </BorderDiv>
+    );
+  };
+  WrapperComponent.displayName = "WrapperComponent";
+  return WrapperComponent;
 };
 
 export const confirm = (props: confirmProps) => {
