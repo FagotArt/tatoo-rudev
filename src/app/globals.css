@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Dayrom' ;
+  src: url('/fonts/DAYROM__.ttf');
+}
+
+.loader {
+  scale: 0.9;
+  width: 25px;
+  aspect-ratio: 1;
+  --g1:conic-gradient(from  90deg at 1px  1px ,#0000 90deg,var(--bg-color) 0);
+  --g2:conic-gradient(from -90deg at 10px 10px,#0000 90deg,var(--bg-color) 0);
+  background:var(--g1),var(--g1),var(--g1), var(--g2),var(--g2),var(--g2);
+  background-size: 11px 11px;
+  background-repeat: no-repeat;
+  animation: l7 1.5s infinite;
+}
+@keyframes l7 {
+  0%   {background-position:0    0   ,0 100%,100% 100% }
+  25%  {background-position:100% 0   ,0 100%,100% 100% }
+  50%  {background-position:100% 0   ,0 0   ,100% 100% }
+  75%  {background-position:100% 0   ,0 0   ,0    100% }
+  100% {background-position:100% 100%,0 0   ,0    100% }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -17,6 +41,7 @@
 }
 
 body {
+  font-family: 'Dayrom';
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,

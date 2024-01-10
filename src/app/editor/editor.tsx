@@ -1,0 +1,237 @@
+"use client";
+import { publishArticle } from "@/actions/admin/editor";
+import Button from "@/components/ui/Button";
+import ErrorMessage from "@/components/ui/errormessage";
+import InfoToolTip from "@/components/ui/infoTooltip";
+import Input from "@/components/ui/input";
+import Loader from "@/components/ui/loader";
+import { PortfolioImage } from "@/components/ui/portfolioeditor";
+import TextArea from "@/components/ui/textarea";
+import { modal } from "@/lib/utils/modal";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import React, { useMemo, useRef, useState } from "react";
+import "react-quill/dist/quill.snow.css";
+
+const ReactQuill = dynamic(
+  async () => {
+    const { default: RQ } = await import("react-quill");
+
+    return ({ forwardedRef, ...props }: any) => <RQ ref={forwardedRef} {...props} />;
+  },
+  {
+    ssr: false, // This line is important. It's what prevents server-side render
+    loading: () => (
+      <div className="w-full h-full flex justify-center items-center">
+        <Loader />
+      </div>
+    ), // Optional loading component
+  }
+);
+
+const Editor = () => {
+  const [article, setArticle] = useState<any>({ content: "", author: "inkformed" });
+  const [errors, setErrors] = useState<any>();
+  const quillRef = useRef<any>(null);
+
+  const handleContentChange = (content: any) => {
+    setArticle({
+      ...article,
+      content,
+    });
+  };
+
+  const publish = async () => {
+    const { error, article : published, url } = await publishArticle(article);
+    if (error) {
+        console.log(error)
+      setErrors(error);
+    } else {
+      setErrors(null);
+      setArticle({
+        ...article,
+        content: "",
+        description: "",
+        slug: "",
+        title: "",
+      });
+      quillRef.current.getEditor().setContents("");
+
+      const fullUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/articles/${published.slug}`;
+      await modal({
+        Element: () => (
+          <div
+            className="font-['Helvetica']"
+          >
+            <div>Your article <strong>"{published.title}"</strong> was published successfully!</div>
+            <div>
+              you can view it at <Link className='text-black/70' href={fullUrl}>{fullUrl}</Link>
+            </div>
+          </div>
+        ),
+      });
+    }
+  };
+
+  const handleInputChange = (field: any) => (event: any) => {
+    if (field === "title") {
+      setArticle({
+        ...article,
+        title: event.target.value,
+        slug: event.target.value
+          .toLowerCase()
+          .replace(/[^\w ]+/g, "")
+          .replace(/ +/g, "-"),
+      });
+    } else {
+      setArticle({
+        ...article,
+        [field]: event.target.value,
+      });
+    }
+  };
+
+  function imageHandler() {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files?.[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = () => {
+          const base64 = reader.result?.toString();
+          const filename = file.name;
+
+          let existingDelta = quillRef.current.getEditor().getContents();
+          let combinedDelta = existingDelta.concat({
+            ops: [
+              {
+                attributes: {
+                  alt: filename,
+                },
+                insert: {
+                  image: base64,
+                },
+              },
+            ],
+          });
+          quillRef.current.getEditor().setContents(combinedDelta);
+        };
+      }
+    };
+  }
+
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          [{ header: [1, 2, false] }],
+          ["bold", "italic", "underline", "strike", "blockquote"],
+          [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
+          ["link", "image"],
+          ["image", "code-block"],
+        ],
+        handlers: {
+          image: imageHandler,
+        },
+      },
+    }),
+    []
+  );
+
+  const selectImage = () => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files?.[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = (event:any) => {
+          const base64 = event.target.result;
+          const filename = file.name;
+
+          setArticle({
+            ...article,
+            image: {
+              type: "file",
+              fileName: filename,
+              file: base64,
+            },
+          });
+        };
+      }
+    };
+  };
+
+  const removeImage = (e:any) => {
+    e.stopPropagation();
+    setArticle({
+      ...article,
+      image: null,
+    });
+  };
+
+  return (
+    <div className="px-[1rem]">
+      <div className="flex flex-col gap-[1rem] mb-[2rem]">
+        <div className="flex gap-[1rem] items-center">
+          <Input error={errors?.title} value={article.title} onChange={handleInputChange("title")} label="Title:" />
+          <InfoToolTip>This is the title of the article. It will be displayed on the article page and in the article list.</InfoToolTip>
+        </div>
+        <div className="flex gap-[1rem] items-center">
+          <Input error={errors?.slug} value={article.slug} onChange={handleInputChange("slug")} label="slug:" />
+          <InfoToolTip>This is the slug of the article. It is used to give the article a unique and SEO friendly url.</InfoToolTip>
+        </div>
+        <div className="flex gap-[1rem] items-center">
+          <Input error={errors?.author} value={article.author} onChange={handleInputChange("author")} label="author:" />
+          <InfoToolTip>This is the author of the article. defaults to inkformed.</InfoToolTip>
+        </div>
+        <div className="flex gap-[1rem] items-center">
+          <div>
+            <div className="text-white">Description:</div>
+            <TextArea error={errors?.description} value={article.description} onChange={handleInputChange("description")} className="min-w-[250px]" />
+          </div>
+          <InfoToolTip>This is the description of the article. It will be displayed on the article page and in the article list.</InfoToolTip>
+        </div>
+        <div>
+          <div className="text-white mb-[10px]">Article Image:</div>
+          <PortfolioImage
+            error={errors?.image}
+            className="w-[300px] h-[300px]"
+            onClick={selectImage}
+            onRemove={removeImage}
+            image={article.image ? (typeof article.image === "string" ? article.image : article.image.file) : null}
+            edit
+          />
+        </div>
+      </div>
+      <ReactQuill
+        forwardedRef={quillRef}
+        modules={modules}
+        className=" bg-white mb-[10px] rounded-[10px] overflow-hidden text-black"
+        value={article.content}
+        onChange={handleContentChange}
+      />
+      {errors?.content && errors?.content !== "" && <ErrorMessage className="mb-[2rem]">{errors?.content}</ErrorMessage>}
+      <div>
+        <Button onClick={publish} className="px-[2rem]">
+          Publish
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export default Editor;

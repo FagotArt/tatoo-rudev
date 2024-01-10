@@ -1,4 +1,23 @@
 {
+  "ts-node": {
+    "ts-node" :{
+      "require": ["tsconfig-paths/register"],
+    },
+    "compilerOptions": {
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "module": "CommonJS",
+      "moduleResolution": "Node",
+      "outDir": "build",
+      "esModuleInterop": true,
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["./src/*"]
+      }
+    },
+    "include": ["./**/*.ts"],
+    "exclude": ["node_modules", "**/*.spec.ts"]
+  },
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
