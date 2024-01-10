@@ -3,6 +3,7 @@ import next from 'next';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import '@/lib/models/';
+import path from 'path';
 
 dotenv.config(); 
 
@@ -26,6 +27,8 @@ const connectToMongoDB = async () => {
 
 app.prepare().then(() => {
   const server = express();
+
+  server.use(express.static(path.join(__dirname, 'public')))
 
   server.all('*', (req:any, res:any) => {
     handle(req, res)
