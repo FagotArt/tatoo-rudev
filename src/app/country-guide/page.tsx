@@ -23,7 +23,7 @@ const Page = () => {
       <Divider className="max-w-[200px] !mb-[2rem]" />
       <GuideMap width={mobile ? 300 : 700} containerClassName="mx-auto mb-[3rem]" />
       <div className="max-w-[calc(1000px+2rem)] mx-auto flex justify-center items-start flex-wrap flex-col md:flex-row gap-[1rem] md:gap-[2rem]">
-        <Section title="Tattoo Etiquette">Dos and don'ts related to tattoos in various countries can help you to navigate your tattoo experiences respectfully.</Section>
+        <Section title="Tattoo Etiquette">Dos and don&apos;ts related to tattoos in various countries can help you to navigate your tattoo experiences respectfully.</Section>
         <Section title="Legal Considerations">
           Tattoo laws and regulations can vary from country to country.
           <br />
