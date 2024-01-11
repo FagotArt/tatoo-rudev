@@ -11,6 +11,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/logo.png" />
+      <script src="//my.visme.co/visme-embed.js"></script>
+      </head>
       <body className="relative min-h-[100vh] bg-[url('/images/smoke_bg.png')] bg-fixed">
         <Providers>
           <div className="relative">

@@ -5,9 +5,10 @@ import Card from "@/components/ui/card";
 import Divider from "@/components/ui/divider";
 import FaqSection from "@/components/ui/faqsection";
 import StyleCard from "@/components/ui/stylecard";
-import { HomeSearch } from "./homeclient";
+import { Guide, HomeSearch } from "./homeclient";
 import Link from "next/link";
 import { getArticles } from "@/actions/articles/articles";
+import GuideMap from "@/components/guidemap";
 
 export default async function Home() {
   const articles = await getArticles();
@@ -146,6 +147,7 @@ export default async function Home() {
       <Divider />
       <div className="mb-[5rem]">
         <div className="text-center px-[2rem] text-4xl mb-[3rem] mx-auto font-bold">Country Guide</div>
+        <Guide />
       </div>
       <Footer />
     </div>

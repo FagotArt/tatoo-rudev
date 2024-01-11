@@ -128,13 +128,16 @@ const NavBar = (props: NavBarProps) => {
         scrolled ? "top-0 bg-black/30 backdrop-blur-[6px]" : `top-[5px]`
       } md:top-[10px] left-0 z-[100] w-full max-w-[100vw] h-20 flex justify-between items-center px-[2rem]  text-${navbarColor}`}
     >
+      <div
+        className='flex-1'
+      >
       <div className="md:hidden">
         <HamMenu navbarColor={scrolled ? "white" : navbarColor} open={isOpen} onClick={() => setIsOpen(!isOpen)} />
       </div>
       <div
         className={`${
           isOpen ? "opacity-[1] translate-y-[0] pointer-events-auto" : "opacity-[0] translate-y-[10px] pointer-events-none"
-        } text-white  duration-300 md:hidden flex flex-col gap-[1rem] justify-center items-center text-[1.2rem] absolute top-[-10px] left-0 w-[100vw] h-[100vh] bg-black/90 backdrop-blur-[8px] z-[20]`}
+        } text-white  duration-300 md:hidden flex flex-col gap-[1rem] justify-center items-center text-[1.2rem] absolute top-[-10px] left-0 w-[100vw] h-[calc(100vh+10px)] bg-black/90 backdrop-blur-[8px] z-[20]`}
       >
         <NavLink onClick={() => setIsOpen(false)} href="/">
           Home
@@ -161,8 +164,11 @@ const NavBar = (props: NavBarProps) => {
         <NavLink href="/articles">Articles</NavLink>
         <NavLink href="/about">About Us</NavLink>
       </div>
-      <div></div>
-      <div className="flex gap-[1rem] items-center justify-end">
+      </div>
+      <div>
+        <img src="/logo.png" className="h-[50px]" />
+      </div>
+      <div className="flex-1 flex gap-[1rem] items-center justify-end">
         <NavLink className="hidden md:flex" href="/country-guide">
           Country Guide
         </NavLink>
