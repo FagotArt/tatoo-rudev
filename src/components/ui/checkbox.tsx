@@ -23,11 +23,11 @@ const CheckBox = forwardRef((props: any, ref: any) => {
   }));
 
   return (
-    <div className={`${className} flex items-center gap-[10px] font-['Helvetica']`}>
+    <div className={`${className} flex items-stretch gap-[10px] font-['Helvetica']`}>
       {Box ? (
         <Box checked={checked} onClick={handleChange} />
       ) : (
-        <div onClick={handleChange} className={`h-[20px] w-[20px] duration-300 ${checked ? "bg-[#F5F5F5]" : ""} border-[1px] border-white/70 cursor-pointer`}></div>
+        <div onClick={handleChange} className={`h-[20px] min-w-[20px] duration-300 ${checked ? "bg-[#F5F5F5]" : ""} border-[1px] border-white/70 cursor-pointer`}></div>
       )}
       <div>
         {label}

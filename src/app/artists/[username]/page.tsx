@@ -14,6 +14,7 @@ import { PortfolioPopup } from "@/components/ui/portfolioeditor";
 import Favorite from "./client";
 import Reviews from "./reviews";
 import Rating from "@/components/ui/rating";
+import { Type, genders, styles, tattooThemes } from "@/lib/global/styles";
 
 const page = async ({ params }: any) => {
   const artist = await getArtistByUsername(params.username);
@@ -32,6 +33,13 @@ const page = async ({ params }: any) => {
       </div>
     );
   }
+
+  const formatField = (field: string,global:any) => {
+    // global is an array of objects each containing 'label' and 'value', find the object with the matching value and return the label
+    const found = global.find((item:any) => item.value === field);
+    return found?.label || field;
+  }
+
   return (
     <div className="pb-[10px]">
       <HeaderSection>
@@ -76,22 +84,34 @@ const page = async ({ params }: any) => {
             </div>
           </div>
           <div className="flex flex-col gap-[10px] px-[10px] min-w-[200px] md:min-w-[300px]">
-            <BackgroundTitle containerClassName="flex-x-1">Styles :</BackgroundTitle>
-            <div className="w-[250px] pl-[1.5rem] text-[0.9rem]">
+            <BackgroundTitle containerClassName="flex-x-1">
+              Styles :
+              </BackgroundTitle>
+            <div className="rounded-b-[1rem] bg-white/80 text-black py-[1rem] mt-[-1.5rem] w-full  pl-[1.5rem] text-[0.9rem]">
               {artist?.styles?.map((style: any,i:any) => (
-                <div key={i} className="font-['Helvetica']">{style}</div>
+                <div key={i} className="font-['Helvetica']">&#x2022; {formatField(style,styles)}</div>
+              ))}
+            </div>
+            <BackgroundTitle containerClassName="flex-x-1">Tattoo Themes :</BackgroundTitle>
+            <div className="rounded-b-[1rem] bg-white/80 text-black py-[1rem] mt-[-1.5rem] w-full  pl-[1.5rem] text-[0.9rem]">
+              {artist?.tattooThemes?.map((theme: any,i:any) => (
+                <div key={i} className="font-['Helvetica']">&#x2022; {formatField(theme,tattooThemes)}</div>
               ))}
             </div>
             <BackgroundTitle containerClassName="flex-x-1">Type :</BackgroundTitle>
-            <div className="w-[250px] pl-[1.5rem] text-[0.9rem] font-['Helvetica']">{artist?.tattooType}</div>
+            <div className="rounded-b-[1rem] bg-white/80 text-black py-[1rem] mt-[-1.5rem] w-full  pl-[1.5rem] text-[0.9rem]">
+              {artist?.type?.map((type: any,i:any) => (
+                <div key={i} className="font-['Helvetica']">&#x2022; {formatField(type,Type)}</div>
+              ))}
+            </div>
             <BackgroundTitle containerClassName="flex-x-1">Artist Gender :</BackgroundTitle>
-            <div className="w-[250px] pl-[1.5rem] text-[0.9rem] font-['Helvetica']">{artist?.gender === "m" ? "Male" : "Female"}</div>
+            <div className="rounded-b-[1rem] bg-white/80 text-black py-[1rem] mt-[-1.5rem] w-full  pl-[1.5rem] text-[0.9rem] font-['Helvetica']">{formatField(artist?.gender,genders)}</div>
             <BackgroundTitle containerClassName="flex-x-1">Location :</BackgroundTitle>
-            <div className="w-[250px] pl-[1.5rem] text-[0.9rem] font-['Helvetica']">{artist?.location}</div>
+            <div className="rounded-b-[1rem] bg-white/80 text-black py-[1rem] mt-[-1.5rem] w-full  pl-[1.5rem] text-[0.9rem] font-['Helvetica']">{artist?.location}</div>
             <BackgroundTitle containerClassName="flex-x-1">Hourly Rate :</BackgroundTitle>
-            <div className="w-[250px] pl-[1.5rem] text-[0.9rem] font-['Helvetica']">{artist?.hourlyRate ? `$${artist?.hourlyRate} / hour` : "Not Available"}</div>
+            <div className="rounded-b-[1rem] bg-white/80 text-black py-[1rem] mt-[-1.5rem] w-full  pl-[1.5rem] text-[0.9rem] font-['Helvetica']">{artist?.hourlyRate ? `£${artist?.hourlyRate} / hour` : "Not Available"}</div>
             <BackgroundTitle containerClassName="flex-x-1">Walk-ins Accepted :</BackgroundTitle>
-            <div className="w-[250px] pl-[1.5rem] text-[0.9rem] font-['Helvetica']">{artist?.walkInsAccepted ? "Yes" : "No"}</div>
+            <div className="rounded-b-[1rem] bg-white/80 text-black py-[1rem] mt-[-1.5rem] w-full  pl-[1.5rem] text-[0.9rem] font-['Helvetica']">{artist?.walkInsAccepted ? "Yes" : "No"}</div>
           </div>
         </div>
         <Divider className='mb-[2rem]' />

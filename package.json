@@ -29,6 +29,7 @@
     "react-dom": "^18",
     "react-icons": "^4.12.0",
     "react-quill": "^2.0.0",
+    "react-range": "^1.8.14",
     "stripe": "^14.10.0",
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.8",

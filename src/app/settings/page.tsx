@@ -8,6 +8,7 @@ import Button from "@/components/ui/Button";
 import BorderDiv from "@/components/ui/borderdiv";
 import BorderDivider from "@/components/ui/borderdivider";
 import CheckBox from "@/components/ui/checkbox";
+import ControlledMultiInput from "@/components/ui/controlledmultiinput";
 import Divider from "@/components/ui/divider";
 import DropDown from "@/components/ui/dropdown";
 import ErrorMessage from "@/components/ui/errormessage";
@@ -19,6 +20,7 @@ import ProfilePicture from "@/components/ui/profilepicture";
 import RoundedTitle from "@/components/ui/roundedtitle";
 import { Tab, TabContent } from "@/components/ui/tab";
 import TextArea from "@/components/ui/textarea";
+import { Type, genders, styles, tattooThemes } from "@/lib/global/styles";
 import { confirm } from "@/lib/utils/modal";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -73,15 +75,15 @@ const Page = () => {
     if (!newUser) return false;
 
     return Object.keys(newUser).some((key) => {
-      if (newUser[key] == null && user[key] == null) return false;
+      if (newUser?.[key] == null && user?.[key] == null) return false;
 
       // Check if both are arrays
-      if (Array.isArray(newUser[key]) && Array.isArray(user[key])) {
+      if (Array.isArray(newUser?.[key]) && Array.isArray(user?.[key])) {
         // Compare lengths and contents
-        return newUser[key].length !== user[key].length || !newUser[key].every((val: any, index: any) => val === user[key][index]);
+        return newUser?.[key].length !== user?.[key].length || !newUser?.[key].every((val: any, index: any) => val === user?.[key][index]);
       }
 
-      return newUser[key] !== user[key];
+      return newUser?.[key] !== user?.[key];
     });
   };
 
@@ -109,6 +111,8 @@ const Page = () => {
       }
     }
   };
+
+  const gender = genders.find(op => op.value === user?.gender)
 
   return (
     <div className="p-[10px]">
@@ -216,18 +220,9 @@ const Page = () => {
                       });
                     }}
                     label="Artist Gender:"
-                    defaultOption={
-                      user?.gender
-                        ? {
-                            label: user?.gender === "m" ? "Male" : "Female",
-                            value: user?.gender,
-                          }
-                        : null
-                    }
-                    options={[
-                      { label: "Male", value: "m" },
-                      { label: "Female", value: "f" },
-                    ]}
+                    defaultOption={gender}
+                    options={genders}
+
                   />
                 </div>
               </div>
@@ -331,8 +326,9 @@ const Page = () => {
                       placeHolder="bio..."
                       inputClassName="h-[200px]"
                     />
-                    <MultiInput
+                    <ControlledMultiInput 
                       label="Styles :"
+                      options={styles}
                       contentOuterClassName="max-w-[300px] min-w-[300px]"
                       onChange={(value: any) => {
                         handleInputChange("styles")({
@@ -344,12 +340,33 @@ const Page = () => {
                       error={errors?.styles}
                       defaultValue={user?.styles}
                     />
-                    <Input
-                      label="Tattoo Type:"
-                      containerClassName="min-w-[300px] max-w-[300px]"
-                      error={errors?.tattooType}
-                      onChange={handleInputChange("tattooType")}
-                      defaultValue={user?.tattooType}
+                    <ControlledMultiInput 
+                      label="Tattoo Themes :"
+                      options={tattooThemes}
+                      contentOuterClassName="max-w-[300px] min-w-[300px]"
+                      onChange={(value: any) => {
+                        handleInputChange("tattooThemes")({
+                          target: {
+                            value: value,
+                          },
+                        });
+                      }}
+                      error={errors?.tattooThemes}
+                      defaultValue={user?.tattooThemes}
+                    />
+                    <ControlledMultiInput 
+                      label="Type :"
+                      options={Type}
+                      contentOuterClassName="max-w-[300px] min-w-[300px]"
+                      onChange={(value: any) => {
+                        handleInputChange("type")({
+                          target: {
+                            value: value,
+                          },
+                        });
+                      }}
+                      error={errors?.type}
+                      defaultValue={user?.type}
                     />
                     <Input
                       label="Location:"

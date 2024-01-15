@@ -53,9 +53,8 @@ const userSchema = new mongoose.Schema({
   },
   images: [String],
   styles: [String],
-  tattooType: {
-    type: String,
-  },
+  tattooThemes: [String],
+  type: [String],
   gender: {
     type: String,
   },
@@ -139,12 +138,14 @@ export const userValidation = yup.object().shape({
   bio: yup.string().nullable().max(500, "Bio must be no more than 500 characters"),
   role: yup.string().oneOf(["artist", "user", "admin"], "Invalid role"),
   images: yup.array().of(yup.string()).nullable(),
-  gender: yup.string().oneOf(["m", "f"], "Invalid gender"),
-  tattooType: yup.string(),
+  gender: yup.string(),
+  tattooType: yup.array().of(yup.string()).nullable(),
   location: yup.string(),
   hourlyRate: yup.number(),
   walkInsAccepted: yup.boolean(),
   styles: yup.array().of(yup.string()),
+  tattooThemes: yup.array().of(yup.string()),
+  type: yup.array().of(yup.string()),
   contactInfo: yup.object().shape({
     email: yup.string().email("Must be a valid email"),
     phone: yup.string().matches(/^\S*$/, "No spaces allowed"),

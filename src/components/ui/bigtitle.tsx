@@ -10,17 +10,23 @@ const BigTitle = (props:any) => {
         <img 
             src="/images/icons/skull.png"
             className='absolute top-0 right-0 translate-y-[-25%] translate-x-[50%] h-[200%] object-contain'
+            // className='absolute top-[-1rem] right-[0.2rem] translate-y-[-25%] translate-x-[50%] h-[200%] object-contain'
         />
-        <BorderDivider/>
+        <BorderDivider
+            className='w-full mx-auto'
+        />
         <div
             className='py-[1rem]'
         >
         {children}
         </div>
-        <BorderDivider />
+        <BorderDivider
+            className='w-full mx-auto'
+        />
         <img 
             src="/images/icons/skull.png"
             className='absolute top-0 left-0 translate-y-[-25%] translate-x-[-50%] h-[200%] object-contain scale-x-[-1]'
+            // className='absolute top-[-1rem] left-[0.2rem] translate-y-[-25%] translate-x-[-50%] h-[200%] object-contain scale-x-[-1]'
         />
     </div>
   )

@@ -8,6 +8,9 @@ import Box from "./box";
 import CheckBox from "@/components/ui/checkbox";
 import SearchBarSecondary from "@/components/ui/searchbarsecondary";
 import Collapse from "@/components/ui/collapse";
+import { Type, styles, tattooThemes } from "@/lib/global/styles";
+import RangeInput from "@/components/ui/rangeinput";
+import Button from "@/components/ui/Button";
 
 const useFilterParams = () => {
   const [currentFilters, setCurrentFilters] = useState<any>([]);
@@ -60,18 +63,18 @@ const useFilterParams = () => {
   const getValue = (key: any) => {
     const filter = currentFilters.find((filter: any) => filter[0] === key);
     return filter ? filter[1] : "";
-  }
+  };
 
   return {
     applyFilter,
     applyFilters,
     currentFilters,
-    getValue
+    getValue,
   };
 };
 
 export const SearchBarFilter = () => {
-  const { applyFilter,getValue,currentFilters } = useFilterParams();
+  const { applyFilter, getValue, currentFilters } = useFilterParams();
 
   const searchRef = useRef<any>(null);
   const searchArtist = () => {
@@ -85,12 +88,11 @@ export const SearchBarFilter = () => {
     }
   }, [currentFilters]);
 
-  return <SearchBar
-  ref={searchRef} onSearch={searchArtist} text="Search for Artists" className="md:min-w-[400px]" containerClassName="mx-auto" />;
+  return <SearchBar ref={searchRef} onSearch={searchArtist} text="Search for Artists" className="md:min-w-[400px]" containerClassName="mx-auto" />;
 };
 
 export const LocationFilter = () => {
-  const { applyFilter,getValue } = useFilterParams();
+  const { applyFilter, getValue } = useFilterParams();
 
   const options = [
     { label: "All", value: "" },
@@ -103,23 +105,15 @@ export const LocationFilter = () => {
     applyFilter("location", option?.value);
   };
 
-  const value = ()=>{
-    return options.find((option)=>option.value===getValue("location"));
-  }
+  const value = () => {
+    return options.find((option) => option.value === getValue("location"));
+  };
 
-  return (
-    <DropDown
-      onChange={locationSearch}
-      value={value()}
-      label="Location:"
-      defaultOption={options[0]}
-      options={options}
-    />
-  );
+  return <DropDown onChange={locationSearch} value={value()} label="Location:" defaultOption={options[0]} options={options} />;
 };
 
 export const SortByFilter = () => {
-  const { applyFilter,getValue } = useFilterParams();
+  const { applyFilter, getValue } = useFilterParams();
 
   const options = [
     { label: "Newest", value: "newest" },
@@ -132,35 +126,25 @@ export const SortByFilter = () => {
     applyFilter("sort", option?.value);
   };
 
-  const value = ()=>{
-    return options.find((option)=>option.value===getValue("sort"));
-  }
+  const value = () => {
+    return options.find((option) => option.value === getValue("sort"));
+  };
 
-  return (
-    <DropDown
-      onChange={sortFilter}
-      value={value()}
-      label="Sort By:"
-      defaultOption={options[0]}
-      options={options}
-    />
-  );
+  return <DropDown onChange={sortFilter} value={value()} label="Sort By:" defaultOption={options[0]} options={options} />;
 };
 
 export const FavoriteFilter = () => {
-  const { applyFilter,getValue } = useFilterParams();
+  const { applyFilter, getValue } = useFilterParams();
 
   const favoriteFilter = (value: any) => {
     applyFilter("favorite", value ? "true" : undefined);
   };
 
-  const value = ()=>{
-    return getValue("favorite")==="true";
-  }
+  const value = () => {
+    return getValue("favorite") === "true";
+  };
 
-  return <CheckBox 
-  value={value()}
-  onChange={favoriteFilter} label="Saved Artists" className="font-['Dayrom']" Box={Box} />;
+  return <CheckBox value={value()} onChange={favoriteFilter} label="Saved Artists" className="font-['Dayrom']" Box={Box} />;
 };
 
 export const CategoriesFilter = () => {
@@ -183,15 +167,30 @@ export const CategoriesFilter = () => {
     setFilters(newFilters);
   };
 
-  const handleHourlyRate = (cat: any) => (e: any) => {
-    if(e.target.value==="" || e.target.value==="0") return handleCategoryClick(cat, null)(false)    
-    
+  const handleHourlyRateInput = (key: any) => (e: any) => {
     const newFilters = [...filters];
-    const index = newFilters.findIndex((filter: any) => filter[0] === cat);
+    const index = newFilters.findIndex((filter: any) => filter[0] === key);
     if (index === -1) {
-      newFilters.push([cat, e.target.value]);
+      newFilters.push([key, e.target.value]);
     } else {
       newFilters[index][1] = e.target.value;
+    }
+    setFilters(newFilters);
+  };
+
+  const handleHourlyRate = (values: any) => {
+    let newFilters = [...filters];
+    const maxindex = newFilters.findIndex((filter: any) => filter[0] === "maxHourlyRate");
+    const minindex = newFilters.findIndex((filter: any) => filter[0] === "minHourlyRate");
+    if (maxindex === -1) {
+      newFilters = [...newFilters, ["maxHourlyRate", values[1]]];
+    } else {
+      newFilters[maxindex][1] = values[1];
+    }
+    if (minindex === -1) {
+      newFilters = [...newFilters, ["minHourlyRate", values[0]]];
+    } else {
+      newFilters[minindex][1] = values[0];
     }
     setFilters(newFilters);
   };
@@ -236,34 +235,11 @@ export const CategoriesFilter = () => {
     return options.some((option: any) => isOptionVisible(option.label));
   };
 
-  const experienceLevelOptions = [
-    { label: "Entry Level", value: "entry" },
-    { label: "Intermediate", value: "intermediate" },
-    { label: "Expert", value: "expert" },
-  ];
+  const stylesOptions = styles;
 
-  const hourlyRateOptions = [
-    { label: "minHourlyRate", value: "minHourlyRate" },
-    { label: "maxHourlyRate", value: "maxHourlyRate" },
-  ];
+  const tattooThemeOptions = tattooThemes;
 
-  const stylesOptions = [
-    { label: "Lorem Ipsum", value: "lorem_ipsum" },
-    { label: "Lorem Ipsum", value: "lorem_ipsum" },
-    { label: "Lorem Ipsum", value: "lorem_ipsum" },
-  ];
-
-  const typeOptions = [
-    { label: "Tattoo Gun", value: "tattoo_gun" },
-    { label: "Tattoo Gun", value: "tattoo_gun" },
-    { label: "Tattoo Gun", value: "tattoo_gun" },
-  ];
-
-  const loremIpsumOptions = [
-    { label: "Lorem Ipsum", value: "lorem_ipsum" },
-    { label: "Lorem Ipsum", value: "lorem_ipsum" },
-    { label: "Lorem Ipsum", value: "lorem_ipsum" },
-  ];
+  const typeOptions = Type;
 
   //#endregion
 
@@ -281,89 +257,92 @@ export const CategoriesFilter = () => {
 
   return (
     <>
-      <div className="mb-[1rem]">Category</div>
+      <div className="mb-[1rem]">
+        <Button onClick={apply} className="w-full">
+          Apply Filters
+        </Button>
+      </div>
       <SearchBarSecondary onChange={handleCategorySearch} onSearch={apply} containerClassName="mb-[2rem] max-w-[250px]" />
-      {hasVisibleOptions(experienceLevelOptions) && (
-        <Collapse title="Experience Level" expanded className="mb-[2rem]">
-          {isOptionVisible("Entry Level") && (
-            <CheckBox value={filterCheckboxValue("experienceLevel", "entry")} onChange={handleCategoryClick("experienceLevel", "entry")} label="Entry Level" count={1259} />
-          )}
-          {isOptionVisible("Intermediate") && (
-            <CheckBox
-              value={filterCheckboxValue("experienceLevel", "intermediate")}
-              onChange={handleCategoryClick("experienceLevel", "intermediate")}
-              label="Intermediate"
-              count={1259}
+      <Collapse title="Hourly Rate" className="mb-[2rem]" expanded>
+        <RangeInput
+          className="mb-[1rem]"
+          values={[Math.max(0,parseInt(inputValue("minHourlyRate"))) || 0, Math.min(500,parseInt(inputValue("maxHourlyRate"))) || 500]}
+          onChange={(values: any) => {
+            handleHourlyRate(values);
+          }}
+        />
+        <div className='flex items-center gap-[1rem] font-["Helvetica"] mx-auto'>
+          <div className="flex items-center gap-[5px]">
+            <input
+              onKeyDown={handleKeyPress}
+              value={inputValue("minHourlyRate")}
+              onChange={handleHourlyRateInput("minHourlyRate")}
+              placeholder="min"
+              className="outline-none border-[1px] min-w-0 placeholder:text-white/70 px-[5px] max-w-[80px] bg-transparent border-white/70 rounded-[5px]"
             />
-          )}
-          {isOptionVisible("Expert") && (
-            <CheckBox value={filterCheckboxValue("experienceLevel", "expert")} onChange={handleCategoryClick("experienceLevel", "expert")} label="Expert" count={1259} />
-          )}
-        </Collapse>
-      )}
-      {hasVisibleOptions(hourlyRateOptions) && (
-        <Collapse title="Hourly Rate" className="mb-[2rem]" expanded>
-          <div className='flex items-center gap-[1rem] font-["Helvetica"]'>
-            <div className="flex items-center gap-[5px]">
-              <input
-                onKeyDown={handleKeyPress}
-                value={inputValue("minHourlyRate")}
-                onChange={handleHourlyRate("minHourlyRate")}
-                placeholder="min"
-                className="outline-none border-[1px] min-w-0 placeholder:text-white/70 px-[5px] max-w-[80px] bg-transparent border-white/70 rounded-[5px]"
-              />
-              <span>/hr</span>
-            </div>
-            <div className="flex items-center gap-[5px]">
-              <input
-                value={inputValue("maxHourlyRate")}
-                onKeyDown={handleKeyPress}
-                onChange={handleHourlyRate("maxHourlyRate")}
-                placeholder="max"
-                className="outline-none border-[1px] min-w-0 placeholder:text-white/70 px-[5px] max-w-[80px] bg-transparent border-white/70 rounded-[5px]"
-              />
-              <span>/hr</span>
-            </div>
+            <span>/hr</span>
           </div>
-        </Collapse>
-      )}
+          <div className="flex items-center gap-[5px]">
+            <input
+              value={inputValue("maxHourlyRate")}
+              onKeyDown={handleKeyPress}
+              onChange={handleHourlyRateInput("maxHourlyRate")}
+              placeholder="max"
+              className="outline-none border-[1px] min-w-0 placeholder:text-white/70 px-[5px] max-w-[80px] bg-transparent border-white/70 rounded-[5px]"
+            />
+            <span>/hr</span>
+          </div>
+        </div>
+      </Collapse>
       {hasVisibleOptions(stylesOptions) && (
         <Collapse title="Styles" className="mb-[2rem]" expanded>
-          {isOptionVisible("Lorem Ipsum") && (
-            <CheckBox value={filterCheckboxValue("styles", "lorem_ipsum")} onChange={handleCategoryClick("styles", "lorem_ipsum")} label="Lorem Ipsum" count={1259} />
-          )}
-          {isOptionVisible("Lorem Ipsum") && (
-            <CheckBox value={filterCheckboxValue("styles", "lorem_ipsum1")} onChange={handleCategoryClick("styles", "lorem_ipsum1")} label="Lorem Ipsum" count={1259} />
-          )}
-          {isOptionVisible("Lorem Ipsum") && (
-            <CheckBox value={filterCheckboxValue("styles", "lorem_ipsum2")} onChange={handleCategoryClick("styles", "lorem_ipsum2")} label="Lorem Ipsum" count={1259} />
-          )}
+          {stylesOptions.map((style: any) => {
+            return (
+              isOptionVisible(style.label) && (
+                <CheckBox
+                  className="mb-[5px]"
+                  value={filterCheckboxValue("styles", style.value)}
+                  onChange={handleCategoryClick("styles", style.value)}
+                  label={style.label}
+                  count={1259}
+                />
+              )
+            );
+          })}
+        </Collapse>
+      )}
+      {hasVisibleOptions(tattooThemeOptions) && (
+        <Collapse title="Tattoo Themes" className="mb-[2rem]" expanded>
+          {tattooThemeOptions.map((style: any) => {
+            return (
+              isOptionVisible(style.label) && (
+                <CheckBox
+                  className="mb-[5px]"
+                  value={filterCheckboxValue("tattooThemes", style.value)}
+                  onChange={handleCategoryClick("tattooThemes", style.value)}
+                  label={style.label}
+                  count={1259}
+                />
+              )
+            );
+          })}
         </Collapse>
       )}
       {hasVisibleOptions(typeOptions) && (
-        <Collapse title="Type" className="mb-[2rem]" expanded>
-          {isOptionVisible("Tattoo Gun") && (
-            <CheckBox value={filterCheckboxValue("type", "tattoo_gun")} onChange={handleCategoryClick("type", "tattoo_gun")} label="Tattoo Gun" count={1259} />
-          )}
-          {isOptionVisible("Tattoo Gun") && (
-            <CheckBox value={filterCheckboxValue("type", "tattoo_gun1")} onChange={handleCategoryClick("type", "tattoo_gun1")} label="Tattoo Gun" count={1259} />
-          )}
-          {isOptionVisible("Tattoo Gun") && (
-            <CheckBox value={filterCheckboxValue("type", "tattoo_gun2")} onChange={handleCategoryClick("type", "tattoo_gun2")} label="Tattoo Gun" count={1259} />
-          )}
-        </Collapse>
-      )}
-      {hasVisibleOptions(loremIpsumOptions) && (
-        <Collapse title="Lorem Ipsum" className="mb-[2rem]" expanded>
-          {isOptionVisible("Lorem Ipsum") && (
-            <CheckBox value={filterCheckboxValue("lorem_ipsum", "lorem_ipsum")} onChange={handleCategoryClick("lorem_ipsum", "lorem_ipsum")} label="Lorem Ipsum" count={1259} />
-          )}
-          {isOptionVisible("Lorem Ipsum") && (
-            <CheckBox value={filterCheckboxValue("lorem_ipsum", "lorem_ipsum1")} onChange={handleCategoryClick("lorem_ipsum", "lorem_ipsum1")} label="Lorem Ipsum" count={1259} />
-          )}
-          {isOptionVisible("Lorem Ipsum") && (
-            <CheckBox value={filterCheckboxValue("lorem_ipsum", "lorem_ipsum2")} onChange={handleCategoryClick("lorem_ipsum", "lorem_ipsum2")} label="Lorem Ipsum" count={1259} />
-          )}
+        <Collapse title="Types" className="mb-[2rem]" expanded>
+          {typeOptions.map((style: any) => {
+            return (
+              isOptionVisible(style.label) && (
+                <CheckBox
+                  className="mb-[5px]"
+                  value={filterCheckboxValue("type", style.value)}
+                  onChange={handleCategoryClick("type", style.value)}
+                  label={style.label}
+                  count={1259}
+                />
+              )
+            );
+          })}
         </Collapse>
       )}
     </>

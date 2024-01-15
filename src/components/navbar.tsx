@@ -99,7 +99,7 @@ const NavBar = (props: NavBarProps) => {
   const { updateRedirect } = useRedirect();
   let navbarColor = "white";
 
-  const blackNavBarPaths = ["/articles", "/about", "/artists", "/signup", "/login"];
+  const blackNavBarPaths = ["/articles", "/about", "/artists", "/signup", "/login",'/styles-and-themes'];
 
   if (blackNavBarPaths.some((path) => pathname.startsWith(path))) {
     navbarColor = "black";
@@ -166,7 +166,7 @@ const NavBar = (props: NavBarProps) => {
       </div>
       </div>
       <div>
-        <img src="/logo.png" className="h-[50px]" />
+        <img src="/logo.png" className={`h-[70px] ${navbarColor === 'black' ? 'invert-[1]' : ''}`} />
       </div>
       <div className="flex-1 flex gap-[1rem] items-center justify-end">
         <NavLink className="hidden md:flex" href="/country-guide">
