@@ -27,28 +27,24 @@ const page = () => {
         className="flex justify-center items-stretch py-[2rem] px-[2rem] gap-[1rem]"
       >
         <div className="max-w-[400px]">
-          <div className="text-[1.5rem] font-bold">Frequently Asked Question</div>
-          <div className="text-[0.9rem] text-white/70 font-['Helvetica']">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio, quo blanditiis numquam obcaecati maiores sit alias culpa laborum. Explicabo delectus error alias
-            aliquid ipsa. Ipsam distinctio est harum architecto omnis.
-          </div>
+          <div className="text-[1.5rem] font-bold">Frequently Asked Questions</div>
         </div>
         <div className="max-w-[calc(100%-400px)]">
-          <FaqSection className="border-t-[1px] py-[10px] border-t-white" title="How to Choose">
+        <FaqSection className="border-t-[1px] py-[10px] border-t-white" title="How to Choose">
             Choosing an artist that is right for you is an underrated task. We have created this guide to help you to make an informed decision.
-            <br/>
-            <br/>
-            You no longer have to search the
-            internet for ratings then social media for the portfolio and then search up how to choose and read countless articles about your worries.
-            <br/>
-            <br/>
-             You also have the option to
-            choose artists that align with your values such as vegan studios or choose consciously to support communities such as the LGBTQ+ community or to support a POC.
-            <br/>
-            <br/>
+            <br />
+            <br />
+            You no longer have to search the internet for ratings then social media for the portfolio and then search up how to choose and read countless articles about your
+            worries.
+            <br />
+            <br />
+            You also have the option to choose artists that align with your values such as vegan studios or choose consciously to support communities such as the LGBTQ+ community
+            or to support a POC.
+            <br />
+            <br />
             Everything you need is now all in one place!
           </FaqSection>
-          <FaqSection className="border-t-[1px] py-[10px] border-t-white" title="Our questions for you">
+          <FaqSection className="border-t-[1px] py-[10px] border-t-white" title="Our Questions for You">
             What styles do you like? If you’re not sure what different styles are out there, then look at our styles guide.
             <br />
             <br />
@@ -65,7 +61,7 @@ const page = () => {
             Where do you want it? You can have an idea; you can have a few ideas; you can also speak to the professional and see where the artist thinks your design will be best
             placed. They know what they are doing and after all, you are already putting a lot of trust in that person. ☺
           </FaqSection>
-          <FaqSection className="border-t-[1px] py-[10px] border-t-white" title="what do people worry about">
+          <FaqSection className="border-t-[1px] py-[10px] border-t-white" title="What Do People Worry About?">
             Will I become less employable?
             <br />
             <br />
@@ -87,7 +83,7 @@ const page = () => {
             This is why we created this tool. Making the right decision is really important! It is possible to regret a tattoo and consider a cover-up or removal, however, choosing
             the right artist who understands your vision and who will best advise is a great way to avoid regret.
           </FaqSection>
-          <FaqSection className="border-t-[1px] py-[10px] border-t-white" title="themes">
+          <FaqSection className="border-t-[1px] py-[10px] border-t-white" title="Tattoo Themes">
             The theme and style of a tattoo are different things. If you are unsure what you want, it may be easier to think of a theme you would like. This will help to narrow
             down your search. Once you know what theme you want, you can look at what style you feel would best suit that theme.
             <div className="pl-[1rem]">
@@ -132,7 +128,7 @@ const page = () => {
               <br />
             </div>
           </FaqSection>
-          <FaqSection className="border-t-[1px] py-[10px] border-t-white" title="Styles">
+          <FaqSection className="border-t-[1px] py-[10px] border-t-white" title="Tattoo Styles">
             It is important to research styles and know what kind of style you would like. Some people may choose to have multiple tattoos of different styles, others may choose
             one style and theme and continue to get tattoos that match this style and theme throughout their tattoo journey. Tattoo styles often have certain imagery typically
             associated with that style of tattoo. However, this doesn’t confine you to this style, nor does the image you want determine your style. Finding a talented artist will
@@ -210,7 +206,7 @@ const page = () => {
               &#x2022; Nordic
             </div>
           </FaqSection>
-          <FaqSection className="border-t-[1px] py-[10px] border-t-white" title="Types">
+          <FaqSection className="border-t-[1px] py-[10px] border-t-white" title="Tattoo Types">
             Artists charge different hourly rates. It would be unfair to say “you get what you paid for” as there are many factors influencing the price such as:
             <div className="pl-[1rem]">
               <br />
@@ -226,7 +222,7 @@ const page = () => {
               <br />
               &#x2022; Type (e.g. a cover-up tattoo may cost more)
             </div>
-            <br/>
+            <br />
             Choosing a tattoo purely for the cheap cost might however be a bad idea. It is important to research an artist's portfolio, reviews, and qualifications before making a
             decision. That is why we have all of this information in one place for you! You should expect to pay around £50- £150 per hour. There are much more expensive tattoos
             and there are cheaper ones too. You will get discounted prices if you are being tattooed by an apprentice.

@@ -67,7 +67,7 @@ const Page = () => {
         Element: ({ proceed }: any) => {
           return (
             <div className="relative text-black">
-              <div className="mb-[1rem]">Complete your signup by adding your artist details.</div>
+              <div className="mb-[1rem]">Complete your sign-up by adding your artist details.</div>
               <div>
                 <Button className="px-[2rem]" containerClassName="mx-auto mb-[10px]" onClick={proceed}>
                   Ok
@@ -93,8 +93,8 @@ const Page = () => {
       <HeaderSection className="pt-[140px]"></HeaderSection>
       <BorderDivider />
       <BigTitle className="mt-[-60px] z-[10]">Artist Sign up</BigTitle>
-      <div className="flex flex-col md:flex-row items-center gap-[1rem] md:gap-0 mx-[10px] pt-[120px] mt-[-55px] min-h-[100%]">
-        <div className="flex-1 flex flex-col gap-[1rem] justify-center items-center">
+      <div className="justify-center flex flex-col md:flex-row items-center gap-[1rem] md:gap-0 mx-[10px] pt-[120px] mt-[-55px] min-h-[100%]">
+        <div className=" flex flex-col gap-[1rem] justify-center items-center">
           <Input onChange={handleInputChange("firstName")} error={errors?.firstName} ref={firstNameRef} className="w-[350px]" label="First Name:" />
           <Input onChange={handleInputChange("lastName")} error={errors?.lastName} ref={lastNameRef} className="w-[350px]" label="Last Name:" />
           <Input onChange={handleInputChange("username")} error={errors?.username} ref={usernameRef} className="w-[350px]" label="Username:" />

@@ -65,14 +65,14 @@ const ProfilePicture = (props: any) => {
           </>
         )}
         {!noBorder && <img src="/images/profile_picture_border.png" alt="profile picture border" className="absolute top-0 left-0 w-full h-full" />}
-        {imageSrc ? (
+        {/* {imageSrc ? ( */}
           <img
             className={`${imageClassName} bg-[linear-gradient(to_bottom,#EFEFEF,#BFBFBF)] object-cover w-[85%] h-[85%] rounded-full absolute top-[1%] left-[1%]`}
-            src={imageSrc}
+            src={imageSrc || '/images/placeholder/person.png'}
           />
-        ) : (
-          <div className={`${imageClassName} bg-[linear-gradient(to_bottom,#EFEFEF,#BFBFBF)] object-cover w-[85%] h-[85%] rounded-full absolute top-[1%] left-[1%]`}></div>
-        )}
+        {/* ) : (
+          <div className={`${imageClassName} bg-[url('/images/placeholder/person.png')] bg-cover bg-center object-cover w-[85%] h-[85%] rounded-full absolute top-[1%] left-[1%]`}></div>
+        )} */}
       </div>
       {error && error !== "" && <ErrorMessage className={`${className} mt-[-10px]`}>{error}</ErrorMessage>}
     </>

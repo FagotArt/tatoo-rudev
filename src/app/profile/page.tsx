@@ -125,10 +125,6 @@ const Page = () => {
                 <span className="font-bold">Email Address:</span>
                 <span className="ml-[10px]">{user?.email}</span>
               </div>
-              <div>
-                <span className="font-bold">Phone Number:</span>
-                <span className="ml-[10px]">{user?.phoneNumber}</span>
-              </div>
             </BorderDiv>
             <Divider className="!mb-[1rem]" />
             <Button
@@ -143,7 +139,6 @@ const Page = () => {
           <div className="flex-1">
             <div className="relative p-[1rem]">
               <div className="text-5xl mb-[0.5rem]">My Account</div>
-              <div className="font-['Helvetica']">{user?.role}</div>
             </div>
             <BorderDivider className="w-[calc(100%-2px)] !mx-0 opacity-[0.5]" />
             <div className="p-[1rem] pl-0">

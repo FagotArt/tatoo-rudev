@@ -16,8 +16,7 @@ const page = async ({ params }: any) => {
         <div className="text-[2rem] border-b-[3px] mb-[1rem] pr-[3rem] w-fit border-b-black">Articles</div>
         <div className="flex flex-col md:flex-row items-start justify-between gap-[2rem]">
           <div className="text-black/70 text-[0.9rem] max-w-[600px]">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit ipsa blanditiis obcaecati tempore ullam, ab voluptates labore animi fugit culpa quibusdam dolorum
-            iste id! Impedit quidem veniam at enim incidunt!
+            Check out our collection of articles to gain general insights on tattoos and the tattooing process!
           </div>
           <SearchBar text="Search" className="md:w-[300px]" />
         </div>

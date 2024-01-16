@@ -5,7 +5,7 @@ import ErrorMessage from "./errormessage";
 const TextArea = (props: any) => {
   const { label, value, onChange, error, defaultValue, className, containerClassName, inputClassName, ...rest } = props;
   const isControlled = value !== undefined;
-  const [localValue, setLocalValue] = useState("");
+  const [localValue, setLocalValue] = useState(defaultValue);
 
   useEffect(() => {
     if (isControlled) {

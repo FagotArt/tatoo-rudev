@@ -165,9 +165,11 @@ const NavBar = (props: NavBarProps) => {
         <NavLink href="/about">About Us</NavLink>
       </div>
       </div>
-      <div>
+      <Link
+        href='/'
+      >
         <img src="/logo.png" className={`h-[70px] ${navbarColor === 'black' ? 'invert-[1]' : ''}`} />
-      </div>
+      </Link>
       <div className="flex-1 flex gap-[1rem] items-center justify-end">
         <NavLink className="hidden md:flex" href="/country-guide">
           Country Guide

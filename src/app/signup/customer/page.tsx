@@ -78,8 +78,8 @@ const Page = () => {
       <HeaderSection className="pt-[140px]"></HeaderSection>
       <BorderDivider />
       <BigTitle className="mt-[-60px] z-[10]">Customer Sign up</BigTitle>
-      <div className="flex mx-[10px] pt-[120px] mt-[-55px] min-h-[100%]">
-        <div className="flex-1 flex flex-col gap-[1rem] justify-center items-center">
+      <div className="justify-center flex mx-[10px] pt-[120px] mt-[-55px] min-h-[100%]">
+        <div className="flex flex-col gap-[1rem] justify-center items-center">
           <Input onChange={handleInputChange("firstName")} error={errors?.firstName} ref={firstNameRef} className="w-[90%] md:w-[350px]" label="First Name:" />
           <Input onChange={handleInputChange("lastName")} error={errors?.lastName} ref={lastNameRef} className="w-[90%] md:w-[350px]" label="Last Name:" />
           <Input onChange={handleInputChange("username")} error={errors?.username} ref={usernameRef} className="w-[90%] md:w-[350px]" label="Username:" />

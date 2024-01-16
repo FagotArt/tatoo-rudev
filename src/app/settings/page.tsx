@@ -20,8 +20,9 @@ import ProfilePicture from "@/components/ui/profilepicture";
 import RoundedTitle from "@/components/ui/roundedtitle";
 import { Tab, TabContent } from "@/components/ui/tab";
 import TextArea from "@/components/ui/textarea";
+import { Locations } from "@/lib/global/locations";
 import { Type, genders, styles, tattooThemes } from "@/lib/global/styles";
-import { confirm } from "@/lib/utils/modal";
+import { confirm, modal } from "@/lib/utils/modal";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -96,6 +97,19 @@ const Page = () => {
       setErrors(null);
       session.update();
       setNewUser(null);
+      await modal({
+        Element: ({proceed}:any)=>{
+          return <div>
+            <div className="text-2xl mb-[1rem]">Profile Updated</div>
+            <div className="text-[0.9rem] mb-[1rem] font-['Helvetica']">Your profile has been updated successfully.</div>
+            <div
+              className="flex justify-center items-center"
+            >
+            <Button onClick={proceed}>Ok</Button>
+            </div>
+          </div>
+        }
+      })
     }
   };
 
@@ -177,14 +191,6 @@ const Page = () => {
               )}
             </div>
             <BorderDivider className="w-[calc(100%-2px)] !mx-0 opacity-[0.5]" />
-            {hasChanged() && (
-              <div className="p-[1rem] mb-[10px] pb-0 ">
-                <div className="flex items-center justify-start gap-[1rem]">
-                  <Button onClick={save}>Save Changes</Button>
-                </div>
-                {errors?.globalError && <ErrorMessage>{errors?.globalError}</ErrorMessage>}
-              </div>
-            )}
             <TabContent currentTab={currentTab} tabName="General">
               <div className="p-[1rem] pl-0">
                 <RoundedTitle className="mb-[2rem]">Account</RoundedTitle>
@@ -219,7 +225,7 @@ const Page = () => {
                         },
                       });
                     }}
-                    label="Artist Gender:"
+                    label="Gender:"
                     defaultOption={gender}
                     options={genders}
 
@@ -327,7 +333,7 @@ const Page = () => {
                       inputClassName="h-[200px]"
                     />
                     <ControlledMultiInput 
-                      label="Styles :"
+                      label="Tattoo Styles :"
                       options={styles}
                       contentOuterClassName="max-w-[300px] min-w-[300px]"
                       onChange={(value: any) => {
@@ -355,7 +361,7 @@ const Page = () => {
                       defaultValue={user?.tattooThemes}
                     />
                     <ControlledMultiInput 
-                      label="Type :"
+                      label="Tattoo Types :"
                       options={Type}
                       contentOuterClassName="max-w-[300px] min-w-[300px]"
                       onChange={(value: any) => {
@@ -368,12 +374,17 @@ const Page = () => {
                       error={errors?.type}
                       defaultValue={user?.type}
                     />
-                    <Input
+                    <DropDown 
+                      onChange={(option: any) => {
+                        handleInputChange("location")({
+                          target: {
+                            value: option.value,
+                          },
+                        });
+                      }}
                       label="Location:"
-                      containerClassName="min-w-[300px] max-w-[300px]"
-                      error={errors?.location}
-                      onChange={handleInputChange("location")}
-                      defaultValue={user?.location}
+                      defaultOption={user?.location ? {label:user?.location,value:user?.location} : null}
+                      options={Locations}
                     />
                     <Input
                       label="Hourly Rate:"
@@ -397,12 +408,20 @@ const Page = () => {
                           },
                         });
                       }}
-                      label="Accept Walk-ins"
+                      label="Accepting Walk-ins"
                       defaultValue={user?.walkInsAccepted}
                     />
                   </div>
                 </div>
               </TabContent>
+            )}
+          {hasChanged() && (
+              <div className="p-[1rem] mb-[10px] pb-0 ">
+                <div className="flex items-center justify-start gap-[1rem]">
+                  <Button onClick={save}>Save Changes</Button>
+                </div>
+                {errors?.globalError && <ErrorMessage>{errors?.globalError}</ErrorMessage>}
+              </div>
             )}
           </div>
         </BackgroundSection>

@@ -11,6 +11,7 @@ import Collapse from "@/components/ui/collapse";
 import { Type, styles, tattooThemes } from "@/lib/global/styles";
 import RangeInput from "@/components/ui/rangeinput";
 import Button from "@/components/ui/Button";
+import { Locations } from "@/lib/global/locations";
 
 const useFilterParams = () => {
   const [currentFilters, setCurrentFilters] = useState<any>([]);
@@ -94,19 +95,17 @@ export const SearchBarFilter = () => {
 export const LocationFilter = () => {
   const { applyFilter, getValue } = useFilterParams();
 
-  const options = [
-    { label: "All", value: "" },
-    { label: "Location 1", value: "1" },
-    { label: "Location 2", value: "2" },
-    { label: "Location 3", value: "3" },
-  ];
+  const options = [{
+    label: "All",
+    value: undefined
+  },...Locations]
 
   const locationSearch = (option: any) => {
     applyFilter("location", option?.value);
   };
 
   const value = () => {
-    return options.find((option) => option.value === getValue("location"));
+    return options.find((option:any) => option.value === getValue("location"));
   };
 
   return <DropDown onChange={locationSearch} value={value()} label="Location:" defaultOption={options[0]} options={options} />;

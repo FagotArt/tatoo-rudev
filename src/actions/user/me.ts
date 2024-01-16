@@ -13,6 +13,8 @@ export const getMe = withServerAuth(async (session) => {
 
 export const updateMe = withServerAuth(async (session, updates) => {
   //validate the user
+  console.log("updates", updates);
+
   let valErrors = {};
   if (updates.profilePicture) {
     const { url, error: pperror } = await saveUserAsset({ ...updates.profilePicture }, session?.user, {

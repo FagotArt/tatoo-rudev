@@ -11,6 +11,7 @@ const ControlledMultiInput = forwardRef((props: any, ref: any) => {
   const [internalValue, setInternalValue] = useState<any>(defaultValue);
   const [internalInputValue, setInternalInputValue] = useState<any>("");
   const [inputSize, setInputSize] = useState<number>(1);
+  const [focused, setFocused] = useState<boolean>(false);
 
   useImperativeHandle(ref, () => ({
     value: internalValue,
@@ -61,6 +62,9 @@ const ControlledMultiInput = forwardRef((props: any, ref: any) => {
   };
 
   const filterOptions = (opt: any) => {
+    if (!internalInputValue || internalInputValue === "") {
+      return opt
+    }
     return opt?.filter((option: any) => {
       return option.value.toLowerCase().includes(internalInputValue.toLowerCase());
     });
@@ -92,16 +96,22 @@ const ControlledMultiInput = forwardRef((props: any, ref: any) => {
           }`}
         >
           <input
+            {...rest}
+            onFocus={() => setFocused(true)}
+            onBlur={() => {
+              setTimeout(() => {
+                setFocused(false);
+              }, 100);
+            }}
             size={inputSize}
             className="bg-transparent max-w-full flex-grow outline-none min-w-0 w-fit"
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
             value={internalInputValue}
             onChange={handleInputChange}
-            {...rest}
           />
-          {options && options.length > 0 && internalInputValue && internalInputValue !== "" && (
-            <div className="max-h-[300px] overflow-y-auto top-[100%] left-0 absolute w-full shadow-md rounded-b-[5px] overflow-x-hidden duration-100">
+          {options && options.length > 0 && ((internalInputValue && internalInputValue !== "") || focused) && (
+            <div className="z-[10] max-h-[300px] overflow-y-auto top-[100%] left-0 absolute w-full shadow-md rounded-b-[5px] overflow-x-hidden duration-100">
               {filterOptions(options)?.map((option: any) => (
                 <div
                   key={option.value}

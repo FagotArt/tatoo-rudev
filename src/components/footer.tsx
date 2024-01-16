@@ -4,9 +4,12 @@ import BackgroundSection from "./bgsection";
 import Button from "./ui/Button";
 import Link from "next/link";
 import { useRedirect } from "@/lib/utils/redirect/redirect";
+import { useSession } from "next-auth/react";
 
 const Footer = () => {
   const { updateRedirect } = useRedirect();
+  const session = useSession();
+  const user :any = session.data?.user;
 
   return (
     <BackgroundSection
@@ -27,6 +30,7 @@ const Footer = () => {
         </div>
         <div className="md:w-[30%]"></div>
         <div className="md:w-[30%] flex flex-col justify-start items-center gap-[1rem]">
+          {(!user || user.error) && 
           <Button
             onClick={() => {
               updateRedirect(window.location.pathname);
@@ -36,9 +40,9 @@ const Footer = () => {
           >
             Sign Up
           </Button>
+          }
           <div className="font-['Helvetica'] text-center">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere nobis optio ab libero adipisci architecto id iste, exercitationem esse porro non corporis ducimus
-            deleniti provident dignissimos consectetur rem illum? Ducimus?
+            Sign up today and become a part of the fastest growing directory of tattoo artists in the UK, or become one of the many individuals looking to find the tattoo artist that best suits them!
           </div>
         </div>
       </div>

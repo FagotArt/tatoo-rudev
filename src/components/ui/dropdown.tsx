@@ -30,7 +30,7 @@ const DropDown = (props: any) => {
            {displayLabel}
         </div>
         <div
-            className={`absolute shadow-[0px_5px_15px_rgba(0,0,0,0.2)] rounded-b-[5px] overflow-hidden duration-100 translate-y-[100%] bottom-0 left-0 w-full grid ${expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]" }`}
+            className={`absolute max-h-[300px] overflow-y-scroll shadow-[0px_5px_15px_rgba(0,0,0,0.2)] rounded-b-[5px] overflow-hidden duration-100 translate-y-[100%] bottom-0 left-0 w-full grid ${expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]" }`}
         >
             <div
                 className="min-h-0"
