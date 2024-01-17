@@ -16,7 +16,7 @@ const BigTitle = (props:any) => {
             className='w-full mx-auto'
         />
         <div
-            className='py-[1rem]'
+            className='py-[1rem] text-[2rem] md:text-[3rem]'
         >
         {children}
         </div>

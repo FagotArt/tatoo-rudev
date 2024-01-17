@@ -180,8 +180,9 @@ const NavBar = (props: NavBarProps) => {
         {session ? (
           <Profile user={session?.user} />
         ) : (
-          <div className="flex text-[0.8rem] md:text-[1rem] gap-[0.5rem] md:gap-[1rem] items-center justify-end">
+          <div className="flex text-[0.7rem] md:text-[1rem] gap-[0.5rem] md:gap-[1rem] items-center justify-end">
             <Button
+  className='whitespace-nowrap'
               onClick={() => {
                 updateRedirect(window.location.pathname);
               }}
@@ -190,6 +191,7 @@ const NavBar = (props: NavBarProps) => {
               Sign Up
             </Button>
             <Button
+              className='whitespace-nowrap'
               onClick={() => {
                 updateRedirect(window.location.pathname);
               }}

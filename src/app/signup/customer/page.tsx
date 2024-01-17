@@ -78,19 +78,19 @@ const Page = () => {
       <HeaderSection className="pt-[140px]"></HeaderSection>
       <BorderDivider />
       <BigTitle className="mt-[-60px] z-[10]">Customer Sign up</BigTitle>
-      <div className="justify-center flex mx-[10px] pt-[120px] mt-[-55px] min-h-[100%]">
+      <div className="justify-center items-center flex flex-col md:flex-row gap-[1rem] mx-[10px] pt-[120px] mt-[-55px] min-h-[100%]">
         <div className="flex flex-col gap-[1rem] justify-center items-center">
-          <Input onChange={handleInputChange("firstName")} error={errors?.firstName} ref={firstNameRef} className="w-[90%] md:w-[350px]" label="First Name:" />
-          <Input onChange={handleInputChange("lastName")} error={errors?.lastName} ref={lastNameRef} className="w-[90%] md:w-[350px]" label="Last Name:" />
-          <Input onChange={handleInputChange("username")} error={errors?.username} ref={usernameRef} className="w-[90%] md:w-[350px]" label="Username:" />
-          <Input onChange={handleInputChange("email")} error={errors?.email} ref={emailRef} className="w-[90%] md:w-[350px]" label="Email:" />
-          <Input onChange={handleInputChange("password")} error={errors?.password} ref={passwordRef} type="password" className="w-[90%] md:w-[350px]" label="Password:" />
+          <Input onChange={handleInputChange("firstName")} error={errors?.firstName} ref={firstNameRef} className="w-[350px]" label="First Name:" />
+          <Input onChange={handleInputChange("lastName")} error={errors?.lastName} ref={lastNameRef} className="w-[350px]" label="Last Name:" />
+          <Input onChange={handleInputChange("username")} error={errors?.username} ref={usernameRef} className="w-[350px]" label="Username:" />
+          <Input onChange={handleInputChange("email")} error={errors?.email} ref={emailRef} className="w-[350px]" label="Email:" />
+          <Input onChange={handleInputChange("password")} error={errors?.password} ref={passwordRef} type="password" className="w-[350px]" label="Password:" />
           <Input
             onChange={handleInputChange("confirmPassword")}
             error={errors?.confirmPassword}
             ref={confirmPasswordRef}
             type="password"
-            className="w-[90%] md:w-[350px]"
+            className="w-[350px]"
             label="Confirm Password:"
           />
         </div>

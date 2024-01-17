@@ -24,12 +24,12 @@ const page = () => {
           maskImage: "linear-gradient(to bottom,rgba(0,0,0,0) ,rgba(0,0,0,1) 20%,rgba(0,0,0,1) 80%),rgba(0,0,0,0)",
         }}
         image="/images/bg_2_skull_design.png"
-        className="flex justify-center items-stretch py-[2rem] px-[2rem] gap-[1rem]"
+        className="flex flex-col md:flex-row justify-center items-stretch py-[2rem] px-[2rem] gap-[1rem]"
       >
         <div className="max-w-[400px]">
-          <div className="text-[1.5rem] font-bold">Frequently Asked Questions</div>
+          <div className="text-[1.5rem] font-bold mb-[1rem]">Frequently Asked Questions</div>
         </div>
-        <div className="max-w-[calc(100%-400px)]">
+        <div className="md:max-w-[calc(100%-400px)]">
         <FaqSection className="border-t-[1px] py-[10px] border-t-white" title="How to Choose">
             Choosing an artist that is right for you is an underrated task. We have created this guide to help you to make an informed decision.
             <br />
