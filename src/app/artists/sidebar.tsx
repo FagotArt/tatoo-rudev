@@ -14,7 +14,7 @@ const SideBar = () => {
       >
         <FaFilter className='text-white'/>
       </div>
-      <div className={`${open ? "max-w-0 min-w-0" : "max-w-[300px] min-w-[300px]"}   md:min-w-[300px] overflow-hidden duration-300 relative !text-white/70 md:flex-1 `}>
+      <div className={`${!open ? "max-w-0 min-w-0" : "max-w-[300px] min-w-[300px]"}   md:min-w-[300px] overflow-hidden duration-300 relative !text-white/70 md:flex-1 `}>
         <div className={`pt-[60px] md:pt-[1rem] bg-[linear-gradient(to_bottom,rgba(255,255,255,0.3),transparent)]  duration-300  p-[1rem]`}>
           <BorderDecorations rightBorder />
           <CategoriesFilter />
