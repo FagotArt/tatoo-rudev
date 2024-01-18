@@ -2,7 +2,8 @@
 const nextConfig = {
     experimental:{
         serverActions: {
-            allowedOrigins: ['inkformedtattoos.com','localhost:8080','localhost:3000']
+            allowedOrigins: ['inkformedtattoos.com','localhost:8080','localhost:3000'],
+            bodySizeLimit: '50mb',
         }
     },
     typescript :{

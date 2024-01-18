@@ -161,10 +161,6 @@ const Page = () => {
                 <span className="font-bold">Email Address:</span>
                 <span className="ml-[10px]">{user?.email}</span>
               </div>
-              <div>
-                <span className="font-bold">Phone Number:</span>
-                <span className="ml-[10px]">{user?.phoneNumber}</span>
-              </div>
             </BorderDiv>
             <Divider className="!mb-[1rem]" />
             <Button containerClassName="w-full mb-[1rem]" href={`/profile`}>
