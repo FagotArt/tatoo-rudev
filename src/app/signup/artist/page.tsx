@@ -89,11 +89,11 @@ const Page = () => {
   };
 
   return (
-    <div className="min-h-[100vh]">
+    <div className="min-h-[100vh] pb-[5rem]">
       <HeaderSection className="pt-[140px]"></HeaderSection>
       <BorderDivider />
       <BigTitle className="mt-[-60px] z-[10]">Artist Sign up</BigTitle>
-      <div className="justify-center flex flex-col md:flex-row items-center gap-[1rem] md:gap-0 mx-[10px] pt-[120px] mt-[-55px] min-h-[100%]">
+      <div className="justify-center flex flex-col items-center gap-[1rem] mx-[10px] pt-[120px] mt-[-55px] min-h-[100%]">
         <div className=" flex flex-col gap-[1rem] justify-center items-center">
           <Input onChange={handleInputChange("firstName")} error={errors?.firstName} ref={firstNameRef} className="w-[350px]" label="First Name:" />
           <Input onChange={handleInputChange("lastName")} error={errors?.lastName} ref={lastNameRef} className="w-[350px]" label="Last Name:" />

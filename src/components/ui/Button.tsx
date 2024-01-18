@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 const Button = (props: any) => {
-    const { className, children, containerClassName, href, onClick, ...rest } = props;
+    const { type,className, children, containerClassName, href, onClick, ...rest } = props;
   
     const buttonContent = (
       <div
@@ -21,6 +21,11 @@ const Button = (props: any) => {
         {children}
       </div>
     );
+    if(type === 'submit') return (
+      <button type="submit" className={`w-fit flex justify-center items-center p-[1px] rounded-[1rem] border-[1px] border-black bg-[linear-gradient(to_top,rgba(255,255,255,0.2),gray,white,gray,rgba(255,255,255,0.2))] ${containerClassName}`}>
+          {buttonContent}
+      </button>
+    )
   
     return href ? (
       <Link href={href} className={`w-fit flex justify-center items-center p-[1px] rounded-[1rem] border-[1px] border-black bg-[linear-gradient(to_top,rgba(255,255,255,0.2),gray,white,gray,rgba(255,255,255,0.2))] ${containerClassName}`}>

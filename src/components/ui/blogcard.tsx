@@ -23,11 +23,13 @@ const BlogCard = (props: BlogCardProps) => {
       <div
         className={
           "cursor-pointer overflow-hidden flex flex-col justify-end items-start w-[350px] h-[400px] rounded-[1rem] bg-white " +
-          "[&:hover>.content]:bg-white [&:hover>.content]:flex-1 [&:hover>.content>.expandable]:flex-1 [&:hover>.content>.line]:bg-black [&:hover>.content]:text-black [&:hover>.content>.expandable]:grid-rows-[1fr] " +
+          "[&>.content]:bg-white [&>.content]:flex-1 [&>.content>.expandable]:flex-1 [&>.content>.line]:bg-black [&>.content]:text-black [&>.content>.expandable]:grid-rows-[1fr] " +
           "max-[788px]:[&>.content]:bg-white max-[788px]:[&>.content]:flex-1 max-[788px]:[&>.content>.expandable]:flex-1 max-[788px]:[&>.content>.line]:bg-black max-[788px]:[&>.content]:text-black max-[788px]:[&>.content>.expandable]:grid-rows-[1fr]"
         }
         style={{
           background: `linear-gradient(to top,rgba(255,255,255,0.3),rgba(0,0,0,0.5)),url('${props.image || ""}')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <div className="p-[1rem] w-full content duration-300 max-h-[50%] flex flex-col">

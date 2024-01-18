@@ -9,10 +9,12 @@ const SideBar = () => {
   return (
     <>
       <div
-        className={`md:hidden absolute top-[0.5rem] left-[1rem] z-[10] w-[40px] h-[40px] flex justify-center items-center rounded-full bg-black/80 p-1 cursor-pointer`}
+        className={`md:hidden absolute top-[0.5rem] left-[1rem] z-[10] font-['Helvetica'] h-[40px] flex justify-center gap-[5px] items-center rounded-full bg-black py-[5px] cursor-pointer px-[10px]`}
         onClick={() => setOpen(!open)}
       >
-        <FaFilter className='text-white'/>
+        <FaFilter className='text-white'/> 
+        {open ? 'hide' : 'show'}{" "}
+        filters
       </div>
       <div className={`${!open ? "max-w-0 min-w-0" : "max-w-[300px] min-w-[300px]"}   md:min-w-[300px] overflow-hidden duration-300 relative !text-white/70 md:flex-1 `}>
         <div className={`pt-[60px] md:pt-[1rem] bg-[linear-gradient(to_bottom,rgba(255,255,255,0.3),transparent)]  duration-300  p-[1rem]`}>

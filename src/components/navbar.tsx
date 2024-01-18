@@ -99,7 +99,7 @@ const NavBar = (props: NavBarProps) => {
   const { updateRedirect } = useRedirect();
   let navbarColor = "white";
 
-  const blackNavBarPaths = ["/articles", "/about", "/artists", "/signup", "/login",'/styles-and-themes'];
+  const blackNavBarPaths = ["/articles", "/about", "/artists", "/signup", "/login", "/styles-and-themes"];
 
   if (blackNavBarPaths.some((path) => pathname.startsWith(path))) {
     navbarColor = "black";
@@ -107,7 +107,7 @@ const NavBar = (props: NavBarProps) => {
 
   const handleScroll = () => {
     const offset = window.scrollY;
-    if (offset > 100) {
+    if (offset > 0) {
       setScrolled(true);
     } else {
       setScrolled(false);
@@ -126,49 +126,45 @@ const NavBar = (props: NavBarProps) => {
     <div
       className={`fixed md:absolute duration-300 ${
         scrolled ? "top-0 bg-black/30 backdrop-blur-[6px]" : `top-[5px]`
-      } md:top-[10px] left-0 z-[100] w-full max-w-[100vw] h-20 flex justify-between items-center px-[2rem]  text-${navbarColor}`}
+      } md:top-[10px] left-0 z-[100] w-full max-w-[100vw] h-[120px] md:h-20 flex justify-between items-center px-[2rem]  text-${navbarColor}`}
     >
-      <div
-        className='flex-1'
-      >
-      <div className="md:hidden">
-        <HamMenu navbarColor={scrolled ? "white" : navbarColor} open={isOpen} onClick={() => setIsOpen(!isOpen)} />
+      <div className="flex-1">
+        <div className="md:hidden">
+          <HamMenu navbarColor={scrolled ? "white" : navbarColor} open={isOpen} onClick={() => setIsOpen(!isOpen)} />
+        </div>
+        <div
+          className={`${
+            isOpen ? "opacity-[1] translate-y-[0] pointer-events-auto" : "opacity-[0] translate-y-[10px] pointer-events-none"
+          } text-white  duration-300 md:hidden flex flex-col gap-[1rem] justify-center items-center text-[1.2rem] absolute top-[-10px] left-0 w-[100vw] h-[calc(100vh+10px)] bg-black/90 backdrop-blur-[8px] z-[20]`}
+        >
+          <NavLink onClick={() => setIsOpen(false)} href="/">
+            Home
+          </NavLink>
+          <NavLink onClick={() => setIsOpen(false)} href="/artists">
+            Explore Artists
+          </NavLink>
+          <NavLink onClick={() => setIsOpen(false)} href="/articles">
+            Articles
+          </NavLink>
+          <NavLink onClick={() => setIsOpen(false)} href="/about">
+            About Us
+          </NavLink>
+          <NavLink onClick={() => setIsOpen(false)} href="/country-guide">
+            Country Guide
+          </NavLink>
+          <NavLink onClick={() => setIsOpen(false)} href="/faq">
+            FAQ
+          </NavLink>
+        </div>
+        <div className="hidden md:flex gap-[1rem] items-center justify-start">
+          <NavLink href="/">Home</NavLink>
+          <NavLink href="/artists">Explore Artists</NavLink>
+          <NavLink href="/articles">Articles</NavLink>
+          <NavLink href="/about">About Us</NavLink>
+        </div>
       </div>
-      <div
-        className={`${
-          isOpen ? "opacity-[1] translate-y-[0] pointer-events-auto" : "opacity-[0] translate-y-[10px] pointer-events-none"
-        } text-white  duration-300 md:hidden flex flex-col gap-[1rem] justify-center items-center text-[1.2rem] absolute top-[-10px] left-0 w-[100vw] h-[calc(100vh+10px)] bg-black/90 backdrop-blur-[8px] z-[20]`}
-      >
-        <NavLink onClick={() => setIsOpen(false)} href="/">
-          Home
-        </NavLink>
-        <NavLink onClick={() => setIsOpen(false)} href="/artists">
-          Explore Artists
-        </NavLink>
-        <NavLink onClick={() => setIsOpen(false)} href="/articles">
-          Articles
-        </NavLink>
-        <NavLink onClick={() => setIsOpen(false)} href="/about">
-          About Us
-        </NavLink>
-        <NavLink onClick={() => setIsOpen(false)} href="/country-guide">
-          Country Guide
-        </NavLink>
-        <NavLink onClick={() => setIsOpen(false)} href="/faq">
-          FAQ
-        </NavLink>
-      </div>
-      <div className="hidden md:flex gap-[1rem] items-center justify-start">
-        <NavLink href="/">Home</NavLink>
-        <NavLink href="/artists">Explore Artists</NavLink>
-        <NavLink href="/articles">Articles</NavLink>
-        <NavLink href="/about">About Us</NavLink>
-      </div>
-      </div>
-      <Link
-        href='/'
-      >
-        <img src="/logo.png" className={`h-[70px] ${navbarColor === 'black' ? 'invert-[1]' : ''}`} />
+      <Link href="/">
+        <img src="/logo.png" className={`h-[70px] ${(navbarColor === "black" && !scrolled) ? "invert-[1]" : ""}`} />
       </Link>
       <div className="flex-1 flex gap-[1rem] items-center justify-end">
         <NavLink className="hidden md:flex" href="/country-guide">
@@ -180,9 +176,9 @@ const NavBar = (props: NavBarProps) => {
         {session ? (
           <Profile user={session?.user} />
         ) : (
-          <div className="flex text-[0.7rem] md:text-[1rem] gap-[0.5rem] md:gap-[1rem] items-center justify-end">
+          <div className="flex flex-col md:flex-row text-[0.7rem] md:text-[1rem] gap-[0.5rem] md:gap-[1rem] items-center justify-end">
             <Button
-  className='whitespace-nowrap'
+              className="whitespace-nowrap"
               onClick={() => {
                 updateRedirect(window.location.pathname);
               }}
@@ -191,7 +187,7 @@ const NavBar = (props: NavBarProps) => {
               Sign Up
             </Button>
             <Button
-              className='whitespace-nowrap'
+              className="whitespace-nowrap"
               onClick={() => {
                 updateRedirect(window.location.pathname);
               }}

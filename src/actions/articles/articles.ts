@@ -21,3 +21,16 @@ export const getArticles = async (search?:any) => {
         return null
     }
 }
+
+export const deleteArticle = async (id:any) => {
+
+    try {
+        const article = await Article.findByIdAndDelete(id)
+        return article
+    } catch (error) {
+        console.log(error)
+        return {
+            error: 'Something went wrong'
+        }
+    }
+}

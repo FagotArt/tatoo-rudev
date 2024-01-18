@@ -37,7 +37,7 @@ const Page = async ({ params, searchParams }: any) => {
           <div className="relative overflow-hidden max-w-full min-h-[500px] flex items-stretch">
             <SideBar />
             <div className="flex-1 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.6),rgba(0,0,0,0.4))]">
-              <div className="flex flex-wrap gap-[1rem] justify-center md:justify-start items-center p-[2rem] w-fit max-w-[1200px] mx-auto">
+              <div className="flex flex-wrap gap-[1rem] justify-center md:justify-start items-center p-[2rem] pt-[4rem] md:pt-[2rem] w-fit max-w-[1200px] mx-auto">
                 {(artists && artists.length > 0) ? (
                   artists.map((artist: any,i:any) => (
                     <ArtistCard

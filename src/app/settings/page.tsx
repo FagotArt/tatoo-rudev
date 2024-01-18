@@ -235,7 +235,7 @@ const Page = () => {
               <div className="p-[1rem] pl-0">
                 <RoundedTitle className="mb-[2rem]">Security</RoundedTitle>
                 <div className="p-[1rem] flex flex-col gap-[10px] max-w-[300px]">
-                  <Input type='password' error={errors?.password} onChange={handleInputChange("password")} label="Password:" containerClassName="min-w-[300px] max-w-[300px]" />
+                  <Input type='password' error={errors?.password} onChange={handleInputChange("password")} label="New Password:" containerClassName="min-w-[300px] max-w-[300px]" />
                   {newUser?.password && (
                     <>
                     <Input type='password'

@@ -10,7 +10,7 @@ interface InputProps {
 }
 
 const Input = React.forwardRef((props: InputProps, ref: any) => {
-  const { label, className,value, containerClassName,onKeyDown, onChange, type, error, defaultValue, ...rest } = props;
+  const { label,name, className,value, containerClassName,onKeyDown, onChange, type, error, defaultValue, ...rest } = props;
   const isControlled = value !== undefined;
   const [hidden, setHidden] = useState<boolean>(type === "password");
   const [localValue, setLocalValue] = useState<string>(defaultValue || "");
@@ -53,7 +53,7 @@ const Input = React.forwardRef((props: InputProps, ref: any) => {
             ${className}`}
         >
           <div className="whitespace-nowrap">{label}</div>
-          <input value={localValue}  onKeyDown={onKeyDown} onChange={handleChange} type={hidden ? "password" : "text"} ref={ref || inputRef} className="bg-transparent min-w-0 outline-none py-[5px] flex-1 " />
+          <input name={name} value={localValue}  onKeyDown={onKeyDown} onChange={handleChange} type={hidden ? "password" : "text"} ref={ref || inputRef} className="bg-transparent min-w-0 outline-none py-[5px] flex-1 " />
           {type === "password" && (
             <div onClick={() => setHidden(!hidden)} className="cursor-pointer text-[1.2rem] hover:text-black">
               {hidden ? <BiShowAlt /> : <BiHide />}

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ErrorMessage from "./errormessage";
 
 const TextArea = (props: any) => {
-  const { label, value, onChange, error, defaultValue, className, containerClassName, inputClassName, ...rest } = props;
+  const { label,name, value, onChange, error, defaultValue, className, containerClassName, inputClassName, ...rest } = props;
   const isControlled = value !== undefined;
   const [localValue, setLocalValue] = useState(defaultValue);
 
@@ -36,7 +36,7 @@ const TextArea = (props: any) => {
         >
           <img src="/images/border_corner.png" className="absolute bottom-[-10px] left-[-10px] z-10 h-[30px] scale-y-[-1]" />
           <img src="/images/border_corner.png" className="absolute bottom-[-10px] right-[-10px] scale-x-[-1] scale-y-[-1] z-10 h-[30px]" />
-          <textarea {...rest} onChange={handleChange} value={localValue} defaultValue={defaultValue} className={`bg-transparent outline-none py-[5px] flex-1 ${inputClassName}`} />
+          <textarea {...rest} name={name} onChange={handleChange} value={localValue} defaultValue={defaultValue} className={`bg-transparent outline-none py-[5px] flex-1 ${inputClassName}`} />
         </div>
       </div>
       {error && error !== "" && <ErrorMessage className={`${className} mt-[-10px]`}>{error}</ErrorMessage>}

@@ -13,9 +13,9 @@ export default async function Home() {
   const articles = await getArticles();
 
   return (
-    <div className={`min-h-[100vh] w-full`}>
+    <div className={`min-h-[100vh] w-full overflow-hidden`}>
       <img
-        className="w-full object-contain object-top"
+        className="scale-[1.5] md:scale-[1] pt-[4rem] md:pt-0 mb-[6rem] md:mb-[2rem] w-full object-contain object-top"
         style={{
           WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0))",
           maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0))",
@@ -84,7 +84,9 @@ export default async function Home() {
           {articles &&
             articles.length > 0 &&
             articles?.map((article) => (
-              <BlogCard key={article.id} title={article.title} image={article.image}>
+              <BlogCard 
+                href={`/articles/${article.slug}`}
+              key={article.id} title={article.title} image={article.image}>
                 {article.description}
               </BlogCard>
             ))}

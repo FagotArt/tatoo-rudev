@@ -1,16 +1,18 @@
 "use client";
-import { publishArticle } from "@/actions/admin/editor";
+import { publishArticle, updateArticle } from "@/actions/admin/editor";
+import { deleteArticle, getArticles } from "@/actions/articles/articles";
 import Button from "@/components/ui/Button";
 import ErrorMessage from "@/components/ui/errormessage";
 import InfoToolTip from "@/components/ui/infoTooltip";
 import Input from "@/components/ui/input";
 import Loader from "@/components/ui/loader";
 import { PortfolioImage } from "@/components/ui/portfolioeditor";
+import { Tab, TabContent } from "@/components/ui/tab";
 import TextArea from "@/components/ui/textarea";
-import { modal } from "@/lib/utils/modal";
+import { confirm, modal } from "@/lib/utils/modal";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "react-quill/dist/quill.snow.css";
 
 const ReactQuill = dynamic(
@@ -35,7 +37,18 @@ const ReactQuill = dynamic(
 const Editor = () => {
   const [article, setArticle] = useState<any>({ content: "", author: "inkformed" });
   const [errors, setErrors] = useState<any>();
+  const [currentTab, setCurrentTab] = useState<any>("New Article");
+  const [articles, setArticles] = useState<any>([]);
   const quillRef = useRef<any>(null);
+
+  const fetchArticles = async () => {
+    const articles = await getArticles();
+
+    setArticles(articles);
+  };
+  useEffect(() => {
+    fetchArticles();
+  }, []);
 
   const handleContentChange = (content: any) => {
     setArticle({
@@ -45,7 +58,8 @@ const Editor = () => {
   };
 
   const publish = async () => {
-    const { error, article: published, url } = await publishArticle(article);
+    const pubfunc  = article?._id ? updateArticle : publishArticle;
+    const { error, article: published, url } = await pubfunc(article);
     if (error) {
       console.log(error);
       setErrors(error);
@@ -65,7 +79,7 @@ const Editor = () => {
         Element: () => (
           <div className="font-['Helvetica']">
             <div>
-              Your article <strong>&apos;{published.title}&apos;</strong> was published successfully!
+              Your article <strong>&apos;{published.title}&apos;</strong> was {article?._id ? 'edited' : 'published successfully'}!
             </div>
             <div>
               you can view it at{" "}
@@ -76,6 +90,8 @@ const Editor = () => {
           </div>
         ),
       });
+
+      fetchArticles();
     }
   };
 
@@ -141,7 +157,6 @@ const Editor = () => {
           ["bold", "italic", "underline", "strike", "blockquote"],
           [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
           ["link", "image"],
-          ["image", "code-block"],
         ],
         handlers: {
           image: imageHandler,
@@ -189,53 +204,92 @@ const Editor = () => {
     });
   };
 
+  const handleDeleteArticle = async (id: any) => {
+    const conf = await confirm({
+      confirmation: "Are you sure you want to delete this article?",
+    });
+    if (conf) {
+      const res = await deleteArticle(id);
+      fetchArticles();
+    }
+  };
+
   return (
     <div className="px-[1rem]">
-      <div className="flex flex-col gap-[1rem] mb-[2rem]">
-        <div className="flex gap-[1rem] items-center">
-          <Input error={errors?.title} value={article.title} onChange={handleInputChange("title")} label="Title:" />
-          <InfoToolTip>This is the title of the article. It will be displayed on the article page and in the article list.</InfoToolTip>
-        </div>
-        <div className="flex gap-[1rem] items-center">
-          <Input error={errors?.slug} value={article.slug} onChange={handleInputChange("slug")} label="slug:" />
-          <InfoToolTip>This is the slug of the article. It is used to give the article a unique and SEO friendly url.</InfoToolTip>
-        </div>
-        <div className="flex gap-[1rem] items-center">
-          <Input error={errors?.author} value={article.author} onChange={handleInputChange("author")} label="author:" />
-          <InfoToolTip>This is the author of the article. defaults to inkformed.</InfoToolTip>
-        </div>
-        <div className="flex gap-[1rem] items-center">
-          <div>
-            <div className="text-white">Description:</div>
-            <TextArea error={errors?.description} value={article.description} onChange={handleInputChange("description")} className="min-w-[250px]" />
+      <div className="flex mb-[2rem]">
+        <Tab currentTab={currentTab} setTab={setCurrentTab}>
+          New Article
+        </Tab>
+        <Tab currentTab={currentTab} setTab={setCurrentTab}>
+          Articles
+        </Tab>
+      </div>
+      <TabContent currentTab={currentTab} tabName="New Article">
+        <div className="flex flex-col gap-[1rem] mb-[2rem]">
+          <div className="flex gap-[1rem] items-center">
+            <Input error={errors?.title} value={article.title} onChange={handleInputChange("title")} label="Title:" />
+            <InfoToolTip>This is the title of the article. It will be displayed on the article page and in the article list.</InfoToolTip>
           </div>
-          <InfoToolTip>This is the description of the article. It will be displayed on the article page and in the article list.</InfoToolTip>
+          <div className="flex gap-[1rem] items-center">
+            <Input error={errors?.slug} value={article.slug} onChange={handleInputChange("slug")} label="slug:" />
+            <InfoToolTip>This is the slug of the article. It is used to give the article a unique and SEO friendly url.</InfoToolTip>
+          </div>
+          <div className="flex gap-[1rem] items-center">
+            <Input error={errors?.author} value={article.author} onChange={handleInputChange("author")} label="author:" />
+            <InfoToolTip>This is the author of the article. defaults to inkformed.</InfoToolTip>
+          </div>
+          <div className="flex gap-[1rem] items-center">
+            <div>
+              <div className="text-white">Description:</div>
+              <TextArea error={errors?.description} value={article.description} onChange={handleInputChange("description")} className="min-w-[250px]" />
+            </div>
+            <InfoToolTip>This is the description of the article. It will be displayed on the article page and in the article list.</InfoToolTip>
+          </div>
+          <div>
+            <div className="text-white mb-[10px]">Article Image:</div>
+            <PortfolioImage
+              error={errors?.image}
+              className="w-[300px] h-[300px]"
+              onClick={selectImage}
+              onRemove={removeImage}
+              image={article.image ? (typeof article.image === "string" ? article.image : article.image.file) : null}
+              edit
+            />
+          </div>
         </div>
+        <div className="relative">
+          <ReactQuill forwardedRef={quillRef} modules={modules} className=" bg-white mb-[10px] rounded-[10px] text-black" value={article.content} onChange={handleContentChange} />
+        </div>
+        {errors?.content && errors?.content !== "" && <ErrorMessage className="mb-[2rem]">{errors?.content}</ErrorMessage>}
         <div>
-          <div className="text-white mb-[10px]">Article Image:</div>
-          <PortfolioImage
-            error={errors?.image}
-            className="w-[300px] h-[300px]"
-            onClick={selectImage}
-            onRemove={removeImage}
-            image={article.image ? (typeof article.image === "string" ? article.image : article.image.file) : null}
-            edit
-          />
+          <Button onClick={publish} className="px-[2rem]">
+            Publish
+          </Button>
         </div>
-      </div>
-      <ReactQuill
-        forwardedRef={quillRef}
-        modules={modules}
-        className=" bg-white mb-[10px] rounded-[10px] overflow-hidden text-black"
-        value={article.content}
-        onChange={handleContentChange}
-      />
-      {errors?.content && errors?.content !== "" && <ErrorMessage className="mb-[2rem]">{errors?.content}</ErrorMessage>}
-      <div>
-        <Button onClick={publish} className="px-[2rem]">
-          Publish
-        </Button>
-      </div>
+      </TabContent>
+      <TabContent currentTab={currentTab} tabName="Articles">
+        <div className="flex flex-col gap-[1rem]">
+          {articles?.map((item: any, i: any) => {
+            return (
+              <div key={i} className="p-[1rem] max-w-[500px] rounded-[1rem] border-[1px] border-white/30">
+                <div className="font-bold text-[1.5rem]">{item.title}</div>
+                <div className="mb-[1rem]">{item.description}</div>
+                <div className="flex gap-[1rem]">
+                  <Button
+                    onClick={() => {
+                      setArticle(item);
+                      setCurrentTab("New Article");
+                    }}
+                  >
+                    Edit
+                  </Button>
+                  <Button onClick={() => handleDeleteArticle(item._id)}>Delete</Button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </TabContent>
     </div>
   );
 };
