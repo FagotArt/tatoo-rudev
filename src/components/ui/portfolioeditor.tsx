@@ -33,9 +33,9 @@ export const PortfolioPopup = (props: any) => {
         <FaCircleChevronLeft
           size={40}
           onClick={goToPrevious}
-          className="text-black absolute left-[10px] top-1/2 -translate-y-1/2 opacity-[0.5] cursor-pointer duration-300 hover:opacity-[1]"
+          className="text-white absolute left-[10px] top-1/2 -translate-y-1/2 opacity-[0.5] cursor-pointer duration-300 hover:opacity-[1]"
         />
-        <FaCircleChevronRight size={40} onClick={goToNext} className="text-black absolute right-[10px] top-1/2 -translate-y-1/2 opacity-[0.5] cursor-pointer duration-300 hover:opacity-[1]" />
+        <FaCircleChevronRight size={40} onClick={goToNext} className="text-white absolute right-[10px] top-1/2 -translate-y-1/2 opacity-[0.5] cursor-pointer duration-300 hover:opacity-[1]" />
       </div>
       <div className="overflow-hidden flex justify-start gap-[1rem]">
         <div

@@ -33,30 +33,29 @@ const page = async ({ params }: any) => {
         </div>
       </HeaderSection>
       <BorderDivider />
-      <div
-        className="max-w-[1000px] mx-auto md:py-[1rem]"
-      >
-      <img src={article?.image} className="rounded-[1rem] overflow-hidden px-[12px] md:px-[2rem] mb-[2rem] mx-auto w-full object-cover object-center" />
-      <div
-        className={`mx-auto px-[2rem] mb-[2rem]
-          [&>h1]:text-[3rem] [&>h1]:font-bold
-          [&>h2]:text-[2rem] [&>h2]:font-bold
+      <div className="max-w-[1000px] mx-auto md:py-[1rem]">
+        <img src={article?.image} className="rounded-[1rem] overflow-hidden px-[12px] md:px-[2rem] mb-[2rem] mx-auto w-full object-cover object-center" />
+        <div
+          className={`ql-editor mx-auto mb-[2rem]
+          [&>h1]:text-[2rem] md:[&>h1]:text-[3rem] [&>h1]:font-bold
+          [&>h2]:text-[1.5rem] md:[&>h2]:text-[1.5rem] [&>h2]:font-bold
           [&>p]:font-['Helvetica']
+          !px-[2rem]
         `}
-        dangerouslySetInnerHTML={{
-          __html: article?.content,
-        }}
-      ></div>
-      <Divider className="mb-[4rem]" />
-      <div className="flex justify-between items-center text-white px-[2rem]">
-        <div className="text-[0.9rem] text-white/70">Published by {article?.author}</div>
-        <div className="text-[0.9rem] text-white/70">{new Date(article?.createdAt).toDateString()}</div>
-      </div>
+          dangerouslySetInnerHTML={{
+            __html: article?.content,
+          }}
+        ></div>
+        <Divider className="mb-[4rem]" />
+        <div className="flex justify-between items-center text-white px-[2rem]">
+          <div className="text-[0.9rem] text-white/70">Published by {article?.author}</div>
+          <div className="text-[0.9rem] text-white/70">{new Date(article?.createdAt).toDateString()}</div>
+        </div>
       </div>
     </div>
   );
 };
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export default page;

@@ -23,9 +23,9 @@ const Input = React.forwardRef((props: InputProps, ref: any) => {
   }, [value, isControlled]);
   
   const handleChange = (e: any) => {
-    if (!isControlled) {
+    // if (!isControlled) {
       setLocalValue(e.target.value);
-    }
+    // }
     onChange && onChange(e);
   }
 

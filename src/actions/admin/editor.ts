@@ -43,6 +43,7 @@ export const publishArticle = withServerAuth(
 
     const { error, data } = await validate(article, articleValidation, {
       castToSchema: true,
+      checkDatabase: true,
     });
 
     if (error) {

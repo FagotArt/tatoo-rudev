@@ -44,7 +44,9 @@ export const articleValidation = yup.object().shape({
     .min(3, "slug must be at least 3 characters long")
     .max(100, "slug must be no more than 100 characters")
     .matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "slug may include letters, numbers, and dashes")
-    .test("unique-slug", "There's already an article with this slug", async (value) => {
+    .test("unique-slug", "There's already an article with this slug", async (value,{options}:any) => {
+      console.log(options?.context)
+      if(!options?.context.checkDatabase) return true;
       const article = await Article.findOne({ slug: value });
       return !article;
     }),

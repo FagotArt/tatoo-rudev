@@ -11,6 +11,7 @@ interface ValidateOptions {
   checkAllFields?: boolean; // If true, all fields in the data object will be validated against the schema. If false, only fields that are defined in the schema will be validated.
   checkDatabase?: boolean;
   castToSchema?: boolean;
+  ignoreDatabase?: Object;
   formatField?: (key: string, value: any) => any;
 }
 
