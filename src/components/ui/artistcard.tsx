@@ -21,7 +21,7 @@ const ArtistCard = (props: any) => {
         />
         <div className="bg-white p-[10px] w-full">
           <div className="flex items-center gap-[10px] mb-[0.5rem]">
-            <div className="border-b-[2px] flex-1 text-black border-black text-[1.1rem]">{artistName}</div>
+            <div className="border-b-[2px] flex-1 text-black border-black text-[1rem]">{artistName}</div>
             <div className="flex-1 flex justify-end items-center">
               <Rating rating={rating} size={20} />
             </div>

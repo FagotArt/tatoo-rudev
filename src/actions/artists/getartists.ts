@@ -21,7 +21,9 @@ const obfuscateContactInfo = async (user: any) => {
     return acc;
   }, {});
 
-  return { ...user, contactInfo: obfuscatedContactInfo };
+  return { ...user, contactInfo: obfuscatedContactInfo,
+    obfuscatedName : user?.firstName?.charAt(0)?.toUpperCase() + user?.lastName?.charAt(0).toUpperCase() + "'s Portfolio"
+  };
 };
 
 const parseFilters = (filters: any, initialQuery: any = {},favoritesList ?: any[]) => {
@@ -41,6 +43,9 @@ const parseFilters = (filters: any, initialQuery: any = {},favoritesList ?: any[
           break;
         case "search":
           query.$text = { $search: value };
+          break;
+        case 'location':
+          query.location = { $in: value?.split(',') }
           break;
         case 'favorite':
           if(value === 'true' && favoritesList){

@@ -1,5 +1,5 @@
 "use client";
-import React, { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import BorderDiv from "./borderdiv";
 import { IoClose } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
@@ -13,12 +13,14 @@ const ControlledMultiInput = forwardRef((props: any, ref: any) => {
   const [inputSize, setInputSize] = useState<number>(1);
   const [focused, setFocused] = useState<boolean>(false);
 
+  const prevValue = useRef<any>();
+
   useImperativeHandle(ref, () => ({
     value: internalValue,
   }));
 
   useEffect(() => {
-    if (value !== undefined) {
+    if (value !== undefined ) {
       setInternalValue(value);
     }
   }, [value]);
@@ -30,7 +32,10 @@ const ControlledMultiInput = forwardRef((props: any, ref: any) => {
   }, []);
 
   useEffect(() => {
-    onChange && onChange(internalValue);
+    if (prevValue.current !== internalValue) {
+      onChange && onChange(internalValue);
+    }
+    prevValue.current = internalValue;
   }, [internalValue]);
 
   const handleKeyDown = (e: any) => {
@@ -63,10 +68,10 @@ const ControlledMultiInput = forwardRef((props: any, ref: any) => {
 
   const filterOptions = (opt: any) => {
     if (!internalInputValue || internalInputValue === "") {
-      return opt
+      return opt;
     }
     return opt?.filter((option: any) => {
-      return option.value.toLowerCase().includes(internalInputValue.toLowerCase());
+      return (option.value || option.label)?.toLowerCase().includes(internalInputValue.toLowerCase());
     });
   };
 

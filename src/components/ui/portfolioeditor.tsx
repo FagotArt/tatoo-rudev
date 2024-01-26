@@ -20,23 +20,23 @@ export const PortfolioPopup = (props: any) => {
   };
 
   return (
-    <div className={`w-[90vw] max-w-[1200px] flex flex-col gap-[1rem] p-[2rem] h-[90vh] max-h-[800px] ${className}`}>
-      <div className="w-full flex-1 relative overflow-hidden">
+    <div className={`relative w-[90vw] max-w-[1200px] flex flex-col gap-[1rem] p-[2rem] h-[90vh] max-h-[800px] ${className}`}>
+      <div className="w-[calc(100%-6rem)] mx-auto flex-1 relative overflow-hidden">
         {images?.map((image: any, index: number) => (
           <img
             key={index}
             src={image}
-            className={`absolute w-full h-full object-cover transition-transform duration-300`}
+            className={`absolute w-full h-full object-contain transition-transform duration-300`}
             style={{ transform: `translateX(${(index - currentIndex) * 100}%)` }}
           />
         ))}
-        <FaCircleChevronLeft
+      </div>
+      <FaCircleChevronLeft
           size={40}
           onClick={goToPrevious}
-          className="text-white absolute left-[10px] top-1/2 -translate-y-1/2 opacity-[0.5] cursor-pointer duration-300 hover:opacity-[1]"
+          className="text-white absolute left-0 top-[40%] -translate-y-1/2 opacity-[0.5] cursor-pointer duration-300 hover:opacity-[1]"
         />
-        <FaCircleChevronRight size={40} onClick={goToNext} className="text-white absolute right-[10px] top-1/2 -translate-y-1/2 opacity-[0.5] cursor-pointer duration-300 hover:opacity-[1]" />
-      </div>
+        <FaCircleChevronRight size={40} onClick={goToNext} className="text-white absolute right-0 top-[40%] -translate-y-1/2 opacity-[0.5] cursor-pointer duration-300 hover:opacity-[1]" />
       <div className="overflow-hidden flex justify-start gap-[1rem]">
         <div
           className="flex justify-center items-center gap-[1rem] duration-300"

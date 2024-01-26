@@ -44,8 +44,8 @@ const Page = async ({ params, searchParams }: any) => {
                     key={i}
                       username={artist.username}
                       image={artist.profilePicture}
-                      artistName={artist.firstName + " " + artist.lastName}
-                      location="Location"
+                      artistName={artist?.firstName?.[0]?.toUpperCase() + artist?.lastName?.[0]?.toUpperCase() + "'s Portfolio"}
+                      location={artist.location?.join(", ")}
                       rating={artist.averageRating}
                       styles={artist.styles?.map((style: any) => ({ label: style }))}
                     />

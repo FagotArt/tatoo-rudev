@@ -1,3 +1,4 @@
+"use client";
 import Footer from "@/components/footer";
 import Button from "@/components/ui/Button";
 import BlogCard from "@/components/ui/blogcard";
@@ -5,22 +6,35 @@ import Card from "@/components/ui/card";
 import Divider from "@/components/ui/divider";
 import FaqSection from "@/components/ui/faqsection";
 import StyleCard from "@/components/ui/stylecard";
-import { Guide, HomeSearch } from "./homeclient";
+import { Guide } from "./homeclient";
 import Link from "next/link";
 import { getArticles } from "@/actions/articles/articles";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import useMediaQuery from "@/lib/utils/useMediaQuery";
 
-export default async function Home() {
-  const articles = await getArticles();
+export default function Home() {
+  const [articles, setArticles] = useState<any>([]);
+  const session = useSession();
+  const mobile = useMediaQuery("(max-width: 768px)");
+  const user = session?.data?.user;
+  useEffect(() => {
+    const fetchArticles = async () => {
+      const res = await getArticles();
+      setArticles(res);
+    };
+    fetchArticles();
+  }, []);
 
   return (
     <div className={`min-h-[100vh] w-full overflow-hidden`}>
       <img
-        className="scale-[1.5] md:scale-[1] pt-[4rem] md:pt-0 mb-[6rem] md:mb-[2rem] w-full object-contain object-top"
+        className="mb-[6rem] md:mb-[2rem] w-full object-contain object-top"
         style={{
           WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0))",
           maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0))",
         }}
-        src="/images/hero_section.png"
+        src={mobile ? '/images/hero_section_mobile.png' : "/images/hero_section.png"}
       />
       <div className="text-center max-w-[800px] px-[2rem] font-['Helvetica'] mb-[4rem] mx-auto">
         Choosing an artist that is right for you is an underrated task. We have created this guide to help you to make an informed decision.
@@ -35,22 +49,26 @@ export default async function Home() {
         <br />
         Everything you need is now all in one place!
       </div>
-      <div className="mb-[4rem] w-[20rem] mx-auto">
-        <div className="text-[1.3rem] font-bold font-['Helvetica']">I AM</div>
-        <div className="font-bold text-5xl text-center">
-          <strong className="bg-[linear-gradient(to_top,gray_40%,white_60%,gray)] bg-clip-text text-transparent">LOOKING</strong>
-        </div>
-      </div>
-      <div className="px-[2rem] flex justify-center items-center  flex-wrap gap-[3rem] mb-[5rem]">
-        <Card href="/signup/customer" className="text-center min-w-[300px] max-w-[600px] cursor-pointer">
-          <img src="/images/icons/looking_for_artist.png" className="h-[10rem] mb-[1rem] mx-auto" />
-          <div className="text-[1.3rem] font-bold mb-[1rem]">i&apos;m looking for an artist</div>
-        </Card>
-        <Card href="/signup/artist" className="text-center min-w-[300px] max-w-[600px] cursor-pointer">
-          <img src="/images/icons/looking_for_costumer.png" className="h-[10rem] pt-[2rem]  mb-[1rem] mx-auto" />
-          <div className="text-[1.3rem] font-bold mb-[1rem]">i&apos;m an artist</div>
-        </Card>
-      </div>
+      {!user && (
+        <>
+          <div className="mb-[4rem] w-[20rem] mx-auto">
+            <div className="text-[1.3rem] font-bold font-['Helvetica']">I AM</div>
+            <div className="font-bold text-5xl text-center">
+              <strong className="bg-[linear-gradient(to_top,gray_40%,white_60%,gray)] bg-clip-text text-transparent">LOOKING</strong>
+            </div>
+          </div>
+          <div className="px-[2rem] flex justify-center items-center  flex-wrap gap-[3rem] mb-[5rem]">
+            <Card href="/signup/customer" className="text-center min-w-[300px] max-w-[600px] cursor-pointer">
+              <img src="/images/icons/looking_for_artist.png" className="h-[10rem] mb-[1rem] mx-auto" />
+              <div className="text-[1.3rem] font-bold mb-[1rem]">i&apos;m looking for an artist</div>
+            </Card>
+            <Card href="/signup/artist" className="text-center min-w-[300px] max-w-[600px] cursor-pointer">
+              <img src="/images/icons/looking_for_costumer.png" className="h-[10rem] pt-[2rem]  mb-[1rem] mx-auto" />
+              <div className="text-[1.3rem] font-bold mb-[1rem]">i&apos;m an artist</div>
+            </Card>
+          </div>
+        </>
+      )}
       <div className="relative mb-[5rem]">
         <img
           src="/images/bg_2_skull_design_tb.png"
@@ -83,10 +101,8 @@ export default async function Home() {
         <div className="mb-[2rem] max-w-[1200px] mx-auto flex flex-wrap gap-[1rem] justify-center items-center">
           {articles &&
             articles.length > 0 &&
-            articles?.map((article) => (
-              <BlogCard 
-                href={`/articles/${article.slug}`}
-              key={article.id} title={article.title} image={article.image}>
+            articles?.map((article: any) => (
+              <BlogCard href={`/articles/${article.slug}`} key={article.id} title={article.title} image={article.image}>
                 {article.description}
               </BlogCard>
             ))}

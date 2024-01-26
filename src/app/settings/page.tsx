@@ -370,17 +370,19 @@ const Page = () => {
                       error={errors?.type}
                       defaultValue={user?.type}
                     />
-                    <DropDown 
-                      onChange={(option: any) => {
+                    <ControlledMultiInput 
+                      label="Locations:"
+                      options={Locations}
+                      contentOuterClassName="max-w-[300px] min-w-[300px]"
+                      onChange={(value: any) => {
                         handleInputChange("location")({
                           target: {
-                            value: option.value,
+                            value: value,
                           },
                         });
                       }}
-                      label="Location:"
-                      defaultOption={user?.location ? {label:user?.location,value:user?.location} : null}
-                      options={Locations}
+                      error={errors?.location}
+                      defaultValue={user?.location}
                     />
                     <Input
                       label="Hourly Rate:"

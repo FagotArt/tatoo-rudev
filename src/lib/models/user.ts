@@ -58,9 +58,9 @@ const userSchema = new mongoose.Schema({
   gender: {
     type: String,
   },
-  location: {
+  location: [{
     type: String,
-  },
+  }],
   hourlyRate: {
     type: Number,
   },
@@ -140,7 +140,7 @@ export const userValidation = yup.object().shape({
   images: yup.array().of(yup.string()).nullable(),
   gender: yup.string(),
   tattooType: yup.array().of(yup.string()).nullable(),
-  location: yup.string(),
+  location: yup.array().of(yup.string()).nullable(),
   hourlyRate: yup.number(),
   walkInsAccepted: yup.boolean(),
   styles: yup.array().of(yup.string()),

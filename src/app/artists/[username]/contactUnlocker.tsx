@@ -13,7 +13,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY 
 
 const ContactUnlocker = ({ artist }: any) => {
   const [error, setError] = useState<any>();
-  const {updateRedirect} = useRedirect()
+  const { updateRedirect } = useRedirect();
 
   const unlock = async () => {
     const plan = await modal({
@@ -22,7 +22,7 @@ const ContactUnlocker = ({ artist }: any) => {
           <div className="flex justify-center items-stretch gap-[1rem]">
             <div className="min-w-[300px] rounded-[10px] shadow-lg border-[1px] border-black/20 p-[1rem] duration-300 hover:translate-y-[-3px]">
               <div className="font-bold py-[0.5rem] border-b-[1px] border-b-black/20 text-[2rem]">Unlock This Artist</div>
-              <div className="py-[1rem] font-['Helvetica'] text-[1.5rem] font-bold">${plans.unlockArtist.amount / 100}</div>
+              <div className="py-[1rem] font-['Helvetica'] text-[1.5rem] font-bold">&pound;{plans.unlockArtist.amount / 100}</div>
               <div className="font-['Helvetica'] mb-[1rem]">Unlocks contact info for this artist.</div>
               <div>
                 <Button
@@ -37,7 +37,7 @@ const ContactUnlocker = ({ artist }: any) => {
             </div>
             <div className="min-w-[300px] rounded-[10px] shadow-lg border-[1px] border-black/20 p-[1rem] duration-300 hover:translate-y-[-3px]">
               <div className="font-bold py-[0.5rem] border-b-[1px] border-b-black/20 text-[2rem]">Unlock All Artists</div>
-              <div className="py-[1rem] font-['Helvetica'] text-[1.5rem] font-bold">${plans.unlockAll.amount / 100}</div>
+              <div className="py-[1rem] font-['Helvetica'] text-[1.5rem] font-bold">&pound;{plans.unlockAll.amount / 100}</div>
               <div className="font-['Helvetica'] mb-[1rem]">Unlocks contact info for all artists.</div>
               <div>
                 <Button

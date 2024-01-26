@@ -12,6 +12,7 @@ import { Type, styles, tattooThemes } from "@/lib/global/styles";
 import RangeInput from "@/components/ui/rangeinput";
 import Button from "@/components/ui/Button";
 import { Locations } from "@/lib/global/locations";
+import ControlledMultiInput from "@/components/ui/controlledmultiinput";
 
 const useFilterParams = () => {
   const [currentFilters, setCurrentFilters] = useState<any>([]);
@@ -26,7 +27,9 @@ const useFilterParams = () => {
   const applyFilter = (key: any, value: any) => {
     const params = new URLSearchParams(searchParams);
     if (value === undefined || value === null || value === "") params.delete(key);
-    else params.set(key, value);
+    else {
+      params.set(key, value);
+    }
     router.replace(`${pathname}?${params.toString()}`);
   };
 
@@ -94,21 +97,32 @@ export const SearchBarFilter = () => {
 
 export const LocationFilter = () => {
   const { applyFilter, getValue } = useFilterParams();
+  const [value, setValue] = useState<any>([]);
 
-  const options = [{
-    label: "All",
-    value: undefined
-  },...Locations]
+  const options: any = Locations;
 
   const locationSearch = (option: any) => {
-    applyFilter("location", option?.value);
+    applyFilter("location", option && option.length > 0 ? option : undefined);
   };
 
-  const value = () => {
-    return options.find((option:any) => option.value === getValue("location"));
-  };
+  useEffect(() => {
+    const valu = getValue("location")
+      ?.split(",")
+      ?.filter((val: any) => val !== "" && val !== undefined);
+    // for each value, find the corresponding option , if the array is empty return undefined
+    setValue(valu && valu.length > 0 ? valu : []);
+  }, [getValue("location")]);
 
-  return <DropDown onChange={locationSearch} value={value()} label="Location:" defaultOption={options[0]} options={options} />;
+  return (
+    <ControlledMultiInput
+      label={<span className="text-black">Locations:</span>}
+      options={options}
+      value={value}
+      className="!text-black"
+      contentOuterClassName="max-w-[300px] min-w-[300px]"
+      onChange={locationSearch}
+    />
+  );
 };
 
 export const SortByFilter = () => {
@@ -256,16 +270,19 @@ export const CategoriesFilter = () => {
 
   return (
     <>
-      <div className="mb-[1rem]">
+      <div className="mb-[1rem] flex items-center gap-[1rem] whitespace-nowrap flex-wrap">
         <Button onClick={apply} className="w-full">
           Apply Filters
+        </Button>
+        <Button href="/artists" className="w-full">
+          Clear Filters
         </Button>
       </div>
       <SearchBarSecondary onChange={handleCategorySearch} onSearch={apply} containerClassName="mb-[2rem] max-w-[250px]" />
       <Collapse title="Hourly Rate" className="mb-[2rem]" expanded>
         <RangeInput
           className="mb-[1rem]"
-          values={[Math.max(0,parseInt(inputValue("minHourlyRate"))) || 0, Math.min(500,parseInt(inputValue("maxHourlyRate"))) || 500]}
+          values={[Math.max(0, parseInt(inputValue("minHourlyRate"))) || 0, Math.min(500, parseInt(inputValue("maxHourlyRate"))) || 500]}
           onChange={(values: any) => {
             handleHourlyRate(values);
           }}
