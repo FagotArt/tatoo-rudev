@@ -19,7 +19,7 @@ const ContactUnlocker = ({ artist }: any) => {
     const plan = await modal({
       Element: ({ proceed }: any) => (
         <div>
-          <div className="flex justify-center items-stretch gap-[1rem]">
+          <div className="flex justify-center flex-wrap items-stretch gap-[1rem]">
             <div className="min-w-[300px] rounded-[10px] shadow-lg border-[1px] border-black/20 p-[1rem] duration-300 hover:translate-y-[-3px]">
               <div className="font-bold py-[0.5rem] border-b-[1px] border-b-black/20 text-[2rem]">Unlock This Artist</div>
               <div className="py-[1rem] font-['Helvetica'] text-[1.5rem] font-bold">&pound;{plans.unlockArtist.amount / 100}</div>
