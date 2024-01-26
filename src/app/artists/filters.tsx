@@ -115,6 +115,7 @@ export const LocationFilter = () => {
 
   return (
     <ControlledMultiInput
+      containerClassName="mx-auto justify-center items-center"
       label={<span className="text-black">Locations:</span>}
       options={options}
       value={value}

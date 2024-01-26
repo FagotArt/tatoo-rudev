@@ -7,7 +7,7 @@ import ErrorMessage from "./errormessage";
 import DropDown from "./dropdown";
 
 const ControlledMultiInput = forwardRef((props: any, ref: any) => {
-  const { label, options, onInputChange, onChange, error, defaultValue, className, placeholder, contentOuterClassName, value, inputValue, contentInnerClassName, ...rest } = props;
+  const { label, options, onInputChange,containerClassName, onChange, error, defaultValue, className, placeholder, contentOuterClassName, value, inputValue, contentInnerClassName, ...rest } = props;
   const [internalValue, setInternalValue] = useState<any>(defaultValue);
   const [internalInputValue, setInternalInputValue] = useState<any>("");
   const [inputSize, setInputSize] = useState<number>(1);
@@ -76,7 +76,7 @@ const ControlledMultiInput = forwardRef((props: any, ref: any) => {
   };
 
   return (
-    <>
+    <div className={`flex flex-wrap gap-[10px] ${containerClassName}`}>
       <div className="ml-[10px] mb-[5px] text-white ">{label}</div>
       <BorderDiv
         className={contentOuterClassName}
@@ -146,7 +146,7 @@ const ControlledMultiInput = forwardRef((props: any, ref: any) => {
         </div>
       </BorderDiv>
       {error && error !== "" && <ErrorMessage className={`${className} mt-[-10px]`}>{error}</ErrorMessage>}
-    </>
+    </div>
   );
 });
 ControlledMultiInput.displayName = "ControlledMultiInput";

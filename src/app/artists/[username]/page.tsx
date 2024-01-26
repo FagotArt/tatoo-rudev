@@ -50,7 +50,7 @@ const page = async ({ params }: any) => {
             artist?.obfuscatedName || artist?.firstName + " " + artist?.lastName + "'s Portfolio"}</div>
             <div className="font-['Helvetica'] text-black/60">{artist?.bio}</div>
           </div>
-          <ProfilePicture image={artist?.profilePicture} className="mb-[-150px] translate-y-[50px] w-[250px] h-[250px] z-[10] mr-[-2rem]" />
+          <ProfilePicture image={artist?.profilePicture} className="mb-[-150px] translate-y-[50px] w-[250px] h-[250px] z-[10] ml-auto mr-[-2rem]" />
         </div>
       </HeaderSection>
       <BorderDivider />

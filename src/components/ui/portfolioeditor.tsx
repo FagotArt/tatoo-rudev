@@ -26,7 +26,7 @@ export const PortfolioPopup = (props: any) => {
           <img
             key={index}
             src={image}
-            className={`absolute w-full h-full object-contain transition-transform duration-300`}
+            className={`absolute bg-transparent w-full h-full object-contain transition-transform duration-300`}
             style={{ transform: `translateX(${(index - currentIndex) * 100}%)` }}
           />
         ))}

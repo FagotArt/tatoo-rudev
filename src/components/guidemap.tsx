@@ -1,5 +1,6 @@
 import { modal } from "@/lib/utils/modal";
 import useMediaQuery from "@/lib/utils/useMediaQuery";
+import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 import { IoExpand } from "react-icons/io5";
 
@@ -8,23 +9,21 @@ const GuideMap = (props: any) => {
   const height = width * 0.5625;
   const mobile = useMediaQuery("(max-width: 640px)");
   const enlarge = async () => {
-
     //get current screen width and height
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
 
     await modal({
-      Element: ({proceed}:any)=>{
-        return <div
-          className="w-full"
-        >
-          <div
-          className="flex-1 rounded-[1rem] overflow-hidden"
-          dangerouslySetInnerHTML={{
-            __html: `
+      Element: ({ proceed }: any) => {
+        return (
+          <div className="w-full">
+            <div
+              className="flex-1 rounded-[1rem] overflow-hidden"
+              dangerouslySetInnerHTML={{
+                __html: `
             <iframe
                 width="${screenWidth}px"
-                height="${mobile ? screenHeight*0.7 : screenHeight}px"
+                height="${mobile ? screenHeight * 0.7 : screenHeight}px"
               id="embedded-project-iframe"
               title="Inkformed Tattoos Country Guide"
               src="//my.visme.co/_embed/w49834dk-inkformed-tattoos-country-guide"
@@ -34,14 +33,15 @@ const GuideMap = (props: any) => {
               allowfullscreen=""
             ></iframe> 
             `,
-          }}
-        ></div>
-        </div>
+              }}
+            ></div>
+          </div>
+        );
       },
       raw: true,
       includeCloseButton: true,
-    })
-  }
+    });
+  };
 
   return (
     <div
@@ -52,12 +52,13 @@ const GuideMap = (props: any) => {
       >
         <img src="/images/border_corner.png" className="absolute bottom-[-10px] left-[-10px] z-10 h-[30px] scale-y-[-1]" />
         <img src="/images/border_corner.png" className="absolute bottom-[-10px] right-[-10px] scale-x-[-1] scale-y-[-1] z-10 h-[30px]" />
-        <div
-        onClick={enlarge}
-        className="absolute bottom-[-2.5rem] right-[50%] translate-x-[50%] z-20 cursor-pointer hover:opacity-80 duration-300"
+        <Link
+          target="_blank"
+          href="https://my.visme.co/view/w49834dk-18r27veq3e3y26qz"
+          className="absolute bottom-[-2.5rem] right-[50%] translate-x-[50%] z-20 cursor-pointer hover:opacity-80 duration-300"
         >
-          <IoExpand className='text-white/80' size={25} />
-        </div>
+          <IoExpand className="text-white/80" size={25} />
+        </Link>
         <div
           className="flex-1 rounded-[1rem] overflow-hidden"
           dangerouslySetInnerHTML={{
