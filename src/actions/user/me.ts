@@ -55,7 +55,7 @@ export const updateMe = withServerAuth(async (session, updates) => {
     }
 
     // if updates.currentPassword is not provided or incorrect
-    if (!updates.currentPassword || !bcrypt.compareSync(updates.password, session?.user?.password)) {
+    if (!updates.currentPassword || !bcrypt.compareSync(updates.currentPassword, session?.user?.password)) {
       valErrors = {
         ...valErrors,
         currentPassword: "Incorrect password",
