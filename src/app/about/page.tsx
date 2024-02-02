@@ -28,7 +28,7 @@ const page = () => {
           Safety and peace of mind is at the heart of the inspiration for Inkformed Tattoos. We are here to provide all the information you need to make an informed choice.
           <br />
           <br />
-          Using our filters, you will be able to find the most suitable artist for you piece. And we connect you right to them!
+          Using our filters, you will be able to find the most suitable artist for your piece. And we connect you right to them!
           <br />
           <br />
           We provide information and guidance to create a complete and informed tattoo experience.

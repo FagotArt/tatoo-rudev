@@ -293,6 +293,13 @@ export default function Home() {
             </div>
           </FaqSection>
           <FaqSection className="border-t-[1px] py-[10px] border-t-white" title="Tattoo Types">
+            In 2023, there are an increasing number of niches within the tattoo industry. The industry is growing, and more than ever there is choice! You can choose a traditional
+            journey, you can choose a journey that aligns with your values, you can choose an experience. You can even choose a tattoo in the comfort of your own home!
+            <br />
+            <br />
+            This is why Inkformed Tattoos was created. To allow you this freedom of choice without the hassle of endless research.
+          </FaqSection>
+          <FaqSection className="border-t-[1px] py-[10px] border-t-white" title="Price">
             Artists charge different hourly rates. It would be unfair to say “you get what you paid for” as there are many factors influencing the price such as:
             <div className="pl-[1rem]">
               <br />
@@ -312,6 +319,12 @@ export default function Home() {
             Choosing a tattoo purely for the cheap cost might however be a bad idea. It is important to research an artist's portfolio, reviews, and qualifications before making a
             decision. That is why we have all of this information in one place for you! You should expect to pay around £50- £150 per hour. There are much more expensive tattoos
             and there are cheaper ones too. You will get discounted prices if you are being tattooed by an apprentice.
+            <br />
+            <br />
+            You should expect to pay around £50- £150 per hour. There are much more expensive tattoos and there are cheaper ones too.
+            <br />
+            <br />
+            You will get discounted prices if you are being tattooed by an apprentice
           </FaqSection>
         </div>
       </div>
