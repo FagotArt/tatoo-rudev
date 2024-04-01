@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { IoMdStar } from "react-icons/io";
 import Rating from "./rating";
-import logo from "../../../public/logo.png";
+import logo from "/public/logo.png";
 import Image from "next/image";
 
 const ArtistCard = (props: any) => {
