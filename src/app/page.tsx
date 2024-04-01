@@ -137,7 +137,7 @@ export default function Home() {
             What Themes do you like the idea of? Maybe you already have an idea? If not, then browse the filters to see what takes your fancy.
             <br />
             <br />
-            Do you just want a tattoo or an added experience? Maybe you’d like a stick and poke or a bamboo tattoo… or the good old traditional tattoo gun ☺ Maybe you’d be more
+            Do you just want a tattoo or an added experience? Maybe you’d like a stick and poke or a bamboo tattoo… or the good old traditional Tattoo Machine ☺ Maybe you’d be more
             comfortable with a Male artist or maybe you want to support an LGBTQ+ owned business. Whatever you want, you can find it here.
             <br />
             <br />

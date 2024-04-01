@@ -77,7 +77,7 @@ export const tattooThemes = [
 
 export const Type = [
     {value:'stick-and-poke',label:'Stick and Poke'},
-    {value:'tattoo-gun',label:'Tattoo Gun'},
+    {value:'tattoo-gun',label:'Tattoo Machine'},
     {value:'bamboo',label:'Bamboo'},
     {value:'scar-cover-up',label:'Scar Cover Up'},
     {value:'mastectomy',label:'Mastectomy'},
