@@ -3,6 +3,8 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { IoMdStar } from "react-icons/io";
 import Rating from "./rating";
+import logo from "../../../public/logo.png";
+import Image from "next/image";
 
 const ArtistCard = (props: any) => {
   const router = useRouter();
@@ -16,9 +18,10 @@ const ArtistCard = (props: any) => {
       className={`cursor-pointer p-[1px] w-[250px] flex justify-center items-center border-[1px] border-black bg-[linear-gradient(to_top,rgba(255,255,255,0.2),gray,white,gray,rgba(255,255,255,0.2))] ${containerClassName}`}
     >
       <div className="flex flex-col flex-1 justify-start items-center">
-        <img className="w-full h-[200px] object-cover" 
+        {image ?  <img className="w-full h-[200px] object-cover" 
             src={image}
-        />
+        /> :<Image src={logo} alt="No image"/> }
+       
         <div className="bg-white p-[10px] w-full">
           <div className="flex items-center gap-[10px] mb-[0.5rem]">
             <div className="border-b-[2px] flex-1 text-black border-black text-[1rem]">{artistName}</div>
