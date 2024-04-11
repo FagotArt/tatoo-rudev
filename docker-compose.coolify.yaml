@@ -7,7 +7,6 @@ services:
         source: /data/assets
         target: /usr/src/app/assets
 
-
 #    depends_on:
 #      - db
 #    environment:
