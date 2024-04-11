@@ -1,0 +1,8 @@
+services:
+  app:
+    build: .
+    container_name: inkformed
+    volumes:
+      - type: bind
+        source: /data/assets
+        target: /usr/src/app/assets
