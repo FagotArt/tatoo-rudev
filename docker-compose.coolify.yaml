@@ -2,8 +2,8 @@ services:
   app:
     build: .
     container_name: inkformed
-    depends_on:
-      - db
+#    depends_on:
+#      - db
 #    environment:
 #      - DATABASE=mongodb://root:CO4Am0h0P7nZWYFcjgo8YPEOA87n8qKPA1OdXf92cDc9EK5UI54UPKBLFSCfkIgN@159.65.167.67:5432/inkformed
 #      - PORT=8081
@@ -12,12 +12,12 @@ services:
 #      - NEXTAUTH_URL=https://inkformedtattoos.com/api/auth
 #      - NODE_ENV=production
 #      - NEXT_PUBLIC_SUBMIT_EMAIL=info@inkformedtattoos.com
-  db:
-    image: mongo
-    container_name: inkformedMongoDB
-    ports:
-      - "27017:27017"
-    volumes:
-      - db-data:/data/db
-volumes:
-  db-data:
+#  db:
+#    image: mongo
+#    container_name: inkformedMongoDB
+#    ports:
+#      - "27017:27017"
+#    volumes:
+#      - db-data:/data/db
+#volumes:
+#  db-data:
