@@ -5,8 +5,8 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE=mongodb://159.65.167.67:27017/inkformed
-      - PORT=8080
+      - DATABASE=mongodb://root:CO4Am0h0P7nZWYFcjgo8YPEOA87n8qKPA1OdXf92cDc9EK5UI54UPKBLFSCfkIgN@159.65.167.67:5432/inkformed
+      - PORT=8081
       - JWTSECRET=awdijoij2349320aiwjd@foeia0ef8u23@$%$%@$ksjioad
       - NEXT_PUBLIC_BACKEND_URL=https://inkformedtattoos.com
       - NEXTAUTH_URL=https://inkformedtattoos.com/api/auth
