@@ -30,7 +30,7 @@ const Footer = () => {
         </div>
         <div className="md:w-[30%]"></div>
         <div className="md:w-[30%] flex flex-col justify-start items-center gap-[1rem]">
-          {(!user || user.error) && 
+          {(!user || user.error) &&
           <Button
             onClick={() => {
               updateRedirect(window.location.pathname);

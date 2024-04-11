@@ -3,15 +3,11 @@ services:
   app:
     build: .
     container_name: inkformed
-    volumes:
-      - ./src:/usr/src/app/src
-    ports:
-      - "8282:8282"
     depends_on:
       - db
     environment:
       - DATABASE=mongodb://db:27017/inkformed
-      - PORT=8282
+      - PORT=80
   db:
     image: mongo
     container_name: inkformedMongoDB
