@@ -5,7 +5,7 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE=mongodb://sk048gc:27017/inkformed
+      - DATABASE=mongodb://159.65.167.67:27017/inkformed
       - PORT=8282
   db:
     image: mongo
