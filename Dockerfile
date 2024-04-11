@@ -3,6 +3,7 @@ FROM node:${NODE_VERSION}-alpine
 WORKDIR /usr/src/app
 EXPOSE 8282
 COPY . .
+
 RUN npm install --frozen-lockfile
 RUN npm run build
 CMD ["npm", "start"]
