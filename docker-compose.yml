@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  app:
+    build: .
+    container_name: inkformedtattoos
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8354:8080"
+    depends_on:
+      - db
+    environment:
+      - DATABASE=mongodb://db:27017/inkformed
+  db:
+    image: mongo
+    container_name: mongoDB
+    ports:
+      - "27017:27017"
+    volumes:
+      - db-data:/data/db
+volumes:
+  db-data:
