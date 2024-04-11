@@ -1,7 +1,7 @@
 ARG NODE_VERSION=20.10.0
 FROM node:${NODE_VERSION}-alpine
 WORKDIR /usr/src/app
-EXPOSE 8282
+EXPOSE 8080
 COPY . .
 
 RUN npm install --frozen-lockfile

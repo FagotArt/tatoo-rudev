@@ -6,7 +6,12 @@ services:
       - db
     environment:
       - DATABASE=mongodb://159.65.167.67:27017/inkformed
-      - PORT=8282
+      - PORT=8080
+      - JWTSECRET=awdijoij2349320aiwjd@foeia0ef8u23@$%$%@$ksjioad
+      - NEXT_PUBLIC_BACKEND_URL=https://inkformedtattoos.com
+      - NEXTAUTH_URL=https://inkformedtattoos.com/api/auth
+      - NODE_ENV=production
+      - NEXT_PUBLIC_SUBMIT_EMAIL=info@inkformedtattoos.com
   db:
     image: mongo
     container_name: inkformedMongoDB
