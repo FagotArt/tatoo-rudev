@@ -6,4 +6,4 @@ COPY . .
 
 RUN npm install --frozen-lockfile
 RUN npm run build
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
