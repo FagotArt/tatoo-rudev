@@ -4,6 +4,7 @@ WORKDIR /usr/src/app
 EXPOSE 8111
 COPY . .
 
+
 RUN npm install --frozen-lockfile
 RUN npm run build
 CMD ["yarn", "start"]
