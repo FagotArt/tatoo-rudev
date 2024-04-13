@@ -27,6 +27,7 @@ const Footer = () => {
           <Link href="/about">About Us</Link>
           <Link href="/country-guide">Country Guide</Link>
           <Link href="/faq">FAQs</Link>
+          <Link href="/faq">TestDeploy</Link>          
         </div>
         <div className="md:w-[30%]"></div>
         <div className="md:w-[30%] flex flex-col justify-start items-center gap-[1rem]">
