@@ -42,7 +42,7 @@ const Footer = () => {
           </Button>
           }
           <div className="font-['Helvetica'] text-center">
-            Sign up today and become a part of the fastest growing directory of tattoo artists in the UK, or become one of the many individuals looking to find the tattoo artist that best suits them!
+            Sign up today and become a part of the fastest growing directory of tattoo artists in the UK, or become one of the many individuals looking to find the tattoo artist that best suits them!!!
           </div>
         </div>
       </div>
