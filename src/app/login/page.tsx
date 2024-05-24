@@ -1,3 +1,4 @@
+//login-reset/page.tsx
 "use client";
 import HeaderSection from "@/components/headersection";
 import Button from "@/components/ui/Button";
